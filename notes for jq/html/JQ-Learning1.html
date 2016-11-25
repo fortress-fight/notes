@@ -1,0 +1,25 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#div1 {
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+		<script src = 'jquery-1.10.1.min.js'></script>
+
+	</head>
+	<body>
+		<div id="div1" class="box">div</div>
+		<!-- <div class="box">div</div> -->
+		<script>
+			var a = $('#div1');
+			// console.log(a)
+			a[0].style.background = '#58a';
+		</script>
+	</body>
+</html>

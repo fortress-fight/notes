@@ -1,0 +1,36 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			div {
+				width: 100px;
+				height: 100px;
+				background: #58a;
+			}
+		</style>
+		<script src = 'jquery-1.10.1.min.js'></script>
+
+	</head>
+	<body>
+		<div>div</div>
+		<script>
+			// window.onload = function () {
+			// 	var div = document.getElementsByTagName('div')[0];
+			// 	div.onclick = function () {
+			// 		alert(this.innerHTML)
+			// 	}
+			// }
+			/* 上下两种的方式结果相同 */
+			$(function(){
+				$('div').click(function(){
+					alert($(this).html())
+				});
+				$('div').click(function(){
+					alert(1)
+				});
+			})
+		</script>
+	</body>
+</html>

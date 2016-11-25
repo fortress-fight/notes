@@ -1,0 +1,24 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			div {
+				width: 100px;
+				height: 100px;
+				background: #58a;
+			}
+		</style>
+		<script src = 'jquery-1.10.1.min.js'></script>
+
+	</head>
+	<body>
+		<div>div</div>
+		<script>
+			$('div').css('background', 'red').click(function () {
+				$(this).css('width', '200px')
+			})
+		</script>
+	</body>
+</html>

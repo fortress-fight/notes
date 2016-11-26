@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body {
+		height: 3000px;
+		margin: 0;
+	}
+		span {
+			border: 1px solid black;
+			width: 100px;
+			height: 100px;
+			display: block;
+			position: absolute;
+			top: 50px;
+			left: 50px;
+		}
+	</style>
+	<script src="jquery-1.10.1.min.js"></script>
+	<script src = 'move.js'></script>
+</head>
+<body>
+	<div>
+		<span  id="box"></span>
+	</div>
+
+	<script>
+
+		function down(obj, speed, rota) {
+			if (typeof speed == 'undefined') {
+				speed = 0;
+			}
+			if (typeof rota == 'undefined') {
+				rota = 0.6;
+			}
+			var t = obj.offsetTop;
+			var low = window.innerHeight - obj.offsetHeight;
+			var top = window.innerHeight - t;
+			obj.timer = setInterval(function () {
+				speed += 1;
+				t = t + speed;
+				if (t > window.innerHeight - obj.offsetHeight) {
+					t = window.innerHeight - obj.offsetHeight;
+					speed = -speed;
+					speed = speed*rota;
+				}
+				if (Math.abs(speed) <= 5 && (window.innerHeight - obj.offsetHeight)<=t) {
+					clearInterval(timer)
+				}
+				obj.style.top = t + 'px';
+			}, 20)
+		}
+		document.onclick = function () {
+			var box = document.getElementById('box');
+			down(box, 50, 0.8)
+		}
+
+
+	</script>
+</body>
+</html>

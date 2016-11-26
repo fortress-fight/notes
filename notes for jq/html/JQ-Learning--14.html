@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<style>
+		div {
+			width: 300px;
+			height: 300px;
+			border: 1px solid black;
+		}
+		#box1 {
+			background: #58a;
+		}
+		#box2 {
+			background: #fb3;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1">1111</div>
+	<div id="box2">2222</div>
+	<script>
+		$('#box1').hover(function () {
+			$('#box2').css('background', 'red')
+		}, function () {
+			$('#box2').css('background', 'yellow')
+		})
+	</script>
+</body>
+</html>

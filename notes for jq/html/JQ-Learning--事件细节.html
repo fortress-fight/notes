@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = 'jquery-1.10.1.min.js'></script>
+</head>
+<body>
+	<div>123</div>
+	<script>
+		/*$(document).on('click', function (ev) {
+			// 到文档的距离
+			alert(ev.pageX);
+		})
+		$(document).on('keydown', function  (ev) {
+			alert(ev.which)
+		})*/
+		$('div').css('width', '200px').css('background','red').one('click', function () {
+			$(this).html($(this).html() + '哈哈')
+		})
+	</script>
+</body>
+</html>

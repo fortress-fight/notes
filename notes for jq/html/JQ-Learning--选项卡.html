@@ -1,0 +1,56 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			div {
+				width: 300px;
+				height: 300px;
+				border: 1px solid black;
+				display: none;
+			}
+			div.active {
+				display: block;
+			}
+			input.active {
+				background: red;
+			}
+		</style>
+		<script src = 'jquery-1.10.1.min.js'></script>
+
+	</head>
+	<body>
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="active">1111</div>
+		<div>2222</div>
+		<div>3333</div>
+		<script>
+			/*window.onload = function () {
+				var aBtn = document.getElementsByTagName('input');
+				var aDiv = document.getElementsByTagName('div');
+				for (var i = 0; i < aBtn.length; i++) {
+					aBtn[i].index = i;
+					aBtn[i].onclick = function () {
+						for (var i = 0; i < aDiv.length; i++) {
+							aDiv[i].className = '';
+							aBtn[i].className = '';
+						}
+						aDiv[this.index].className = 'active';
+						this.className = 'active';
+					}
+				}
+			}*/
+			$(function  () {
+				$('input').click(function () {
+					$('div').attr('class', '');
+					$('div').eq($(this).index()).attr('class', 'active');
+					$('input').attr('class', '')
+					$(this).attr('class', 'active');
+				})
+			})
+		</script>
+	</body>
+</html>

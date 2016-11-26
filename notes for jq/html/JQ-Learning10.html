@@ -1,0 +1,35 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+		</style>
+		<script src = 'jquery-1.10.1.min.js'></script>
+
+	</head>
+	<body>
+		<ul>
+			<li></li>
+			<li class="box"></li>
+			<li></li>
+			<li id="div"><span></span></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<script>
+			$(function  () {
+				$('.box').next().css('background', 'red').next().css('background', 'blue');
+				$('.box').prev().css('background', 'yellow');
+
+				/*这里像素的单位不写默认px*/
+				$('ul').find('li').css('width', '400px').css('height', '100');
+
+				$('li').eq(1).css('background', 'pink');
+
+				// 当对一组元素使用index的时候，得到的是这组元素中的第一个的位置
+				alert($('#div').index())
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+		</style>
+		<script src = 'jquery-1.10.1.min.js'></script>
+
+	</head>
+	<body>
+		<ul>
+			<li></li>
+			<li class="box"></li>
+			<li></li>
+			<li id="div"><span></span></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<script>
+			$(function  () {
+				$('li').css('border', '1px solid black').css('height', '100px').css('width', '200px');
+
+				// not -- 除了not的
+				$('li').not('.box').css('background', 'red')
+
+				// filter -- 符合要求的
+				$('li').filter('.box').css('background','yellow');
+
+				// 里面具有span的
+				$('li').has('span').css('background', 'blue')
+			})
+		</script>
+	</body>
+</html>

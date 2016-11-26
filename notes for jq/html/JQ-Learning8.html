@@ -1,0 +1,31 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			div {
+				width: 100px;
+				height: 100px;
+				background: #58a;
+			}
+		</style>
+		<script src = 'jquery-1.10.1.min.js'></script>
+
+	</head>
+	<body>
+		<div>div</div>
+		<div id="box">div</div>
+		<script>
+			$('div').filter('#box').css('width', '300px')
+			// 这回会将所有的都修改，css中两个参数即是设置
+			$('div').html('这是修改后的').css('background', 'blue');
+			// attr 设置attribute 即属性，不能改变样式
+			$('div').attr('height', '400px')
+			alert($('div').html())
+			// 这里只会弹出第一个的宽度，css中一个参数即是获取
+			alert($('div').css('width'))
+			alert($('div').attr('height'))
+		</script>
+	</body>
+</html>

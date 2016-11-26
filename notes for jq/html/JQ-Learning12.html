@@ -1,0 +1,35 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script src = 'jquery-1.10.1.min.js'></script>
+		<style>
+			body {
+				height: 3000px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div">
+			<span>结构中的第一个</span>
+			<div>结构中的第二个</div>
+		</div>
+		<script>
+		/* 首先 on 适用于绑定事件， 可以同时绑定多个事件，以及自定义事件 */
+			$(function () {
+				$('#div').on('click mouseover', function () {
+					alert(1);
+					// off 适用于解绑事件，
+					$(this).off('mouseover')
+				})
+				$(function () {
+					$(document).on('click', function () {
+						alert($(window).scrollTop());
+					})
+				})
+			})
+		</script>
+	</body>
+</html>
+</html>

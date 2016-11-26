@@ -162,4 +162,167 @@ $不仅仅具有选择器的功能，并且具有window.onload的功能：
 
 3)取值和赋值：
 
+css() || attr()
+
+```
+   <script>
+        $('div').filter('#box').css('width', '300px')
+        // 这回会将所有的都修改，css中两个参数即是设置
+        $('div').html('这是修改后的').css('background', 'blue');
+        // attr 设置attribute 即属性，不能改变样式
+        $('div').attr('height', '400px')
+        alert($('div').html())
+        // 这里只会弹出第一个的宽度，css中一个参数即是获取
+        alert($('div').css('width'))
+        alert($('div').attr('height'))
+    </script>
+```
+
+
+
 >注：当对一组元素取值的时候，取的的是这组中的第一个，但是赋值是对全部的元素进行操作；
+
+4) 过滤
+
+filter() || not() || has()
+
+```
+    <script>
+        $(function  () {
+            $('li').css('border', '1px solid black').css('height', '100px').css('width', '200px');
+
+            // not -- 除了not的
+            $('li').not('.box').css('background', 'red')
+
+            // filter -- 符合要求的
+            $('li').filter('.box').css('background','yellow');
+
+            // 里面具有span的
+            $('li').has('span').css('background', 'blue')
+        })
+    </script>
+```
+
+5) 选择元素
+
+next() || prev() || find() || eq() || index()
+
+```
+    <script>
+        $(function  () {
+            $('.box').next().css('background', 'red').next().css('background', 'blue');
+            $('.box').prev().css('background', 'yellow');
+
+            /*这里像素的单位不写默认px*/
+            $('ul').find('li').css('width', '400px').css('height', '100');
+
+            $('li').eq(1).css('background', 'pink');
+
+            // 当对一组元素使用index的时候，得到的是这组元素中的第一个的位置
+            alert($('#div').index())
+        })
+    </script>
+```
+
+实例一：
+
+jq编写选项卡：
+
+```
+    <script>
+        /*window.onload = function () {
+            var aBtn = document.getElementsByTagName('input');
+            var aDiv = document.getElementsByTagName('div');
+            for (var i = 0; i < aBtn.length; i++) {
+                aBtn[i].index = i;
+                aBtn[i].onclick = function () {
+                    for (var i = 0; i < aDiv.length; i++) {
+                        aDiv[i].className = '';
+                        aBtn[i].className = '';
+                    }
+                    aDiv[this.index].className = 'active';
+                    this.className = 'active';
+                }
+            }
+        }*/
+        $(function  () {
+            $('input').click(function () {
+                $('div').attr('class', '');
+                $('div').eq($(this).index()).attr('class', 'active');
+                $('input').attr('class', '')
+                $(this).attr('class', 'active');
+            })
+        })
+    </script>
+```
+
+## 4. JQ 放方法之属性操作
+
+### 4.1 属性相关
+
+addClass() || removeClass() || width() || innerWidth() || outerWidth() || outerWidth(true);
+
+width: 计算后宽度
+innerWidth：width + padding
+outerWidth：width + padding + border
+outerWidth(true): width + padding + border + margin
+
+### 4.2 节点相关：
+
+insertBefore() || before() || insetAfter() || after() || appendTo() || append() || prependTo() || prepend() || remove()
+
+insetAfter() -- 放到目标点后面；
+prependTo() -- 从前面插入；
+
+以insertBefore()为例：
+```
+    // $(function () {
+    //  $('div div').insertBefore($('span'))
+    // })
+
+    /*上下使用效果是一样的*/
+
+    // var a = document.getElementById('div');
+    // a.insertBefore(a.children[1], a.children[0])
+
+    /* insetBefore 和 before 的区别 */
+
+    $(function () {
+        $('div div').insertBefore($('span')).css('background', 'red')
+
+        /* 首先before的意思是将后面元素放到前面元素的前面 */
+
+        $('span').before($('div div')).css('background', 'blue');
+    })
+
+```
+
+
+### 4.3 事件相关：
+
+on() || off()
+
+```
+    <script>
+    /* 首先 on 适用于绑定事件， 可以同时绑定多个事件，以及自定义事件 */
+        $(function () {
+            $('#div').on('click mouseover', function () {
+                alert(1);
+                // off 适用于解绑事件，
+                $(this).off('mouseover')
+            })
+        })
+    </script>
+```
+
+### 4.4 BOM相关
+
+scrollTop()
+
+```
+    $(function () {
+        $(document).on('click', function () {
+            alert($(window).scrollTop());
+        })
+    })
+```

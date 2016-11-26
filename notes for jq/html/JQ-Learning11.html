@@ -1,0 +1,40 @@
+<!document html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script src = 'jquery-1.10.1.min.js'></script>
+	</head>
+	<body>
+		<div id="div">
+			<span>结构中的第一个</span>
+			<div>结构中的第二个</div>
+		</div>
+		<script>
+			// $(function () {
+			// 	$('div div').insertBefore($('span'))
+			// })
+
+			/*上下使用效果是一样的*/
+
+			// var a = document.getElementById('div');
+			// a.insertBefore(a.children[1], a.children[0])
+
+			/* insetBefore 和 before 的区别 */
+
+			/*$(function () {
+				$('div div').insertBefore($('span')).css('background', 'red')
+
+				 首先before的意思是将后面元素放到前面元素的前面 
+
+				$('span').before($('div div')).css('background', 'blue');
+
+			})*/
+
+			var span = document.getElementsByTagName('span')[0];
+			span.parentNode.removeChild(span);
+
+		</script>
+	</body>
+</html>
+</html>

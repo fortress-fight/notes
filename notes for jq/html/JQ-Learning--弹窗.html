@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script src = 'jquery-1.10.1.min.js'></script>
+		<style>
+			body {
+				height: 3000px;
+			}
+
+			#box {
+				position: absolute;
+				left: 0; top: 0;
+				width: 300px;
+				height: 300px;
+				background: red;
+				border: 1px solid black;
+			}
+
+		</style>
+	</head>
+	<body>
+		<input type="button" value="点击">
+	<!-- 
+		<div id="box">
+			<input type="text" value="name">
+			<input type="text" value="name">
+			<div class="closs">X</div>
+		</div> -->
+		<script>
+			$('input').on('click', function () {
+				var a = $('<div id="box"><input type="text" value="name"><input type="text" value="name"><div class="closs">X</div></div>')
+				$('body').append(a);
+				console.log( document.documentElement.clientHeight)
+				a.appendTo($('body'));
+				a.css('left', ($(window).width() - a.width())/2);
+				a.css('top', ($(window).height()-a.outerHeight())/2);
+				$(window).on('scroll resize', function () {
+					a.css('left', ($(window).width() - a.width())/2 + $(window).scrollLeft());
+					a.css('top', ($(window).height()-a.outerHeight())/2 + $(window).scrollTop());
+				})
+				$('.closs').on('click', function () {
+					a.remove();
+				})
+			})
+		</script>
+	</body>
+</html>
+</html>

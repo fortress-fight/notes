@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		// $('li').get(2).css('background', 'red');
+		/*上面就不能正常使用了*/
+
+		// $('li').get(2).style.background = 'red'
+
+		$('li')[2].style.background = 'red'
+
+	</script>
+</body>
+</html>

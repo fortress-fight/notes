@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 20px;
+		}
+	</style>
+</head>
+<body>
+	<form action="">
+		<input type="text" name = 'a' value="1">
+		<input type="text" name = 'b' value="2">
+		<input type="text" name = 'c' value="3">
+	</form>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		var a = $('form').serialize();
+		console.log(a)
+		// a=1&b=2&c=3
+
+		var b = $('form').serializeArray()
+		console.log(b)
+
+		/*
+		b的格式：
+		[
+			{
+				name: ,
+				value:
+			}
+		]
+		 */
+
+	</script>
+</body>
+</html>

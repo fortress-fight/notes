@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 20px;
+			background: #58a;
+			margin: 50px;
+		}
+
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		$.extend ({
+			leftTrim: function (str) {
+				return str.replace(/^\s+/,'');
+			}
+		})
+		var a = '  hello   +'
+
+		var b = $.leftTrim(a);
+		console.log(b)
+
+
+		$.fn.extend({
+			drag: function (ev) {
+				$(this).mousedown(function (ev) {
+					alert(ev.pageX)
+				})
+			}
+		})
+
+		$("ul").drag();
+	</script>
+</body>
+</html>

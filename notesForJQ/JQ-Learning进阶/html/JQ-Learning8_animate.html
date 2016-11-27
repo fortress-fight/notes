@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 20px;
+			background: #58a;
+			margin: 50px;
+		}
+
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		/*$('div').click(function () {
+			$(this).animate({
+				'width': 1000
+			}, 1000, 'swing', function () {
+				$(this).animate({
+					'height': 500
+				})
+			})
+		})*/
+		/*$('div').eq(0).click(function () {$(this).animate({'width': 1000}, 2000, 'swing').animate({'height': 500})});
+
+		$('div').eq(1).click(function () {
+			$('div').eq(0).stop(true,true);
+		})*/
+		/*$('div').eq(0).click(function () {$(this).animate({'width': 1000}, 2000, 'swing').animate({'height': 500})});
+		$('div').eq(1).click(function () {
+			$('div').eq(0).finish();
+		})*/
+
+		/*$('div').eq(1).click(function () {
+			$(this).animate({"width":1000}, 2000).delay(1000).animate({'height': 500})
+		})*/
+
+		$('div').eq(1).click(function () {
+			$(this).animate({"width":1000}, 2000, function () {
+				$(this).delay(1000).animate({'height': 500})
+			})
+		})
+	</script>
+</body>
+</html>

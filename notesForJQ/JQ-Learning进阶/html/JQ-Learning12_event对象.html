@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 20px;
+			background: #58a;
+			margin: 50px;
+		}
+
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		/*$("ul").click(function (ev) {
+			console.log(ev.target) // 点击的标签
+			console.log(ev.type) // 事件名 click
+		})*/
+
+		$('ul').on('click', {'name':'hello'},function (ev) {
+			console.log(ev.data.name)
+		})
+	</script>
+</body>
+</html>

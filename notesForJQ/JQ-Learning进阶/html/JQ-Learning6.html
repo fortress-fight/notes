@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 20px;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<span>111</span>
+	<span>111</span>
+	<span>111</span>
+	<span>111</span>
+	<span>111</span>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		// $('span').wrap('<div>')
+
+		// $('span').wrapAll('<div>')
+
+		$('span').wrapInner('<em>')
+		$('em').unwrap();
+	</script>
+</body>
+</html>

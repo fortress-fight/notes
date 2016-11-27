@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 20px;
+		}
+	</style>
+</head>
+<body>
+	<span>111</span>
+	<span>111</span>
+	<span>111</span>
+	<span>111</span>
+	<span>111</span>
+	<div>2222222</div>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		/*var a = $('div')
+		$('span').add(a).css('background', 'blue')*/
+		// 或者
+		$('span').add('div').css('background', 'red')
+	</script>
+</body>
+</html>

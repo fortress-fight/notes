@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		/*$('li').eq(2).mouseover(function () {
+			alert($(this).html())
+		})
+		$('li').eq(2).remove().appendTo($('ul'));*/
+
+		/*事件已经被删除，不能再次触发*/
+
+		$('li').eq(2).mouseover(function () {
+			alert($(this).html())
+		})
+		$('li').eq(2).detach().appendTo($('ul'));
+		/*事件没有被删除，还能再次触发*/
+	</script>
+</body>
+</html>

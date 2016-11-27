@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 20px;
+			background: #58a;
+			margin: 50px;
+		}
+
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script src = 'jquery-1.10.1.min.js'></script>
+	<script>
+		// var a = [];
+		// alert($.type(a));
+
+
+		/*var a = ('  hello  ');
+		var b = a.trim();
+		console.log(a) // '  hello  '
+		console.log(b) // 'hello'*/
+
+		/*var a = ['a', 'b', 'c', 'd'];
+		alert($.inArray('c', a)) // 2*/
+
+		function show (n1, n2) {
+			console.log(n1);
+			console.log(n2);
+			console.log(this);
+		}
+
+		// $.proxy(show, window)(1, 2)
+
+
+		// $(document).click($.proxy(show, window, 1, 2));
+		
+		$(document).click($.proxy(show, window, 1)(2));
+
+
+	</script>
+</body>
+</html>

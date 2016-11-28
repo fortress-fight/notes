@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/index.css">
+	<meta name="viewport" content="width = device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<script>
+		;(function(){
+			var html = document.documentElement
+			var hWidth = html.clientWidth;
+			html.style.fontSize = hWidth/16 + 'px';
+		})();
+	</script>
+	<style>
+		body {
+			margin: 0;
+		}
+		#box div {
+			box-sizing: border-box;
+			float: left;
+			width: 4rem;
+			height: 4rem;
+			border: 1px solid black;
+		}
+
+		div:nth-of-type(1) {
+			background: red;
+		}
+
+		div:nth-of-type(2) {
+			background: yellow;
+		}
+
+		div:nth-of-type(3) {
+			background: blue;
+		}
+
+		div:nth-of-type(4) {
+			background: pink;
+		}
+	</style>
+	
+</head>
+<body>
+	<div id="box">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+
+</body>
+</html>

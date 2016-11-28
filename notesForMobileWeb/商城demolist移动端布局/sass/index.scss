@@ -1,0 +1,91 @@
+@function r ($px) {
+	@return $px / 50 + rem;
+}
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dd,
+form{
+	margin: 0;
+}
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+img {
+	border: none;
+	vertical-align: top;
+}
+input,
+textarea {
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+select {
+	outline:none;
+}
+textarea {
+	resize: none;
+	overflow: auto;
+}
+table {
+	border-collapse: collapse;
+}
+th,
+td {
+	padding: 0;
+}
+
+
+a,
+input,
+button {
+	-webkit-tap-hightlight-color: rgba(0,0,0,0)
+}
+
+
+input,
+button {
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+
+body {
+	font-family: Helvetica;
+}
+body * {
+	-webkit-text-size-adjust: 100%;
+	-webkit-user-select: none;
+}
+
+
+header {
+	height: r(103);
+	background: #ef3239;
+	position: relative;
+	a {
+		width: r(128);
+		height: r(88);
+		position: absolute;
+		top: 0;
+	}
+	#task {
+		left: 0;
+	}
+	#refrash {
+		right: 0;
+	}
+}

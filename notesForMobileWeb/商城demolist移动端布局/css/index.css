@@ -1,0 +1,78 @@
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dd,
+form {
+  margin: 0; }
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+a {
+  text-decoration: none; }
+
+img {
+  border: none;
+  vertical-align: top; }
+
+input,
+textarea {
+  margin: 0;
+  padding: 0;
+  outline: none; }
+
+select {
+  outline: none; }
+
+textarea {
+  resize: none;
+  overflow: auto; }
+
+table {
+  border-collapse: collapse; }
+
+th,
+td {
+  padding: 0; }
+
+a,
+input,
+button {
+  -webkit-tap-hightlight-color: transparent; }
+
+input,
+button {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+body {
+  font-family: Helvetica; }
+
+body * {
+  -webkit-text-size-adjust: 100%;
+  -webkit-user-select: none; }
+
+header {
+  height: 2.06rem;
+  background: #ef3239;
+  position: relative; }
+  header a {
+    width: 2.56rem;
+    height: 1.76rem;
+    position: absolute;
+    top: 0; }
+  header #task {
+    left: 0; }
+  header #refrash {
+    right: 0; }
+
+/*# sourceMappingURL=index.css.map */

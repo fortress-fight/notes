@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="text">
+	<script>
+		function formatFn(str){
+			var s = str.replace(/(\d+)\D+(\d+)\D+(\d+)\D/,function($0,$1,$2,$3){
+				//console.log($0);
+				return $1+'年'+$2+'月'+$3+'日';
+			});
+			return s;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="button" value="检测里面是否有abc">
+	<span></span>
+	<script>
+		var oText = document.getElementsByTagName("input")[0];
+		var oBtn = document.getElementsByTagName("input")[1];
+		var oSpan = document.getElementsByTagName("span")[0];
+		// var re = new RegExp("abc");
+		var re = /abc/
+		oBtn.onclick = function(){
+			var str = oText.value;
+			oSpan.innerHTML = re.test(str);
+		}
+	</script>
+</body>
+</html>

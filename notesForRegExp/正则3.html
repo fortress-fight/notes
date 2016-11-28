@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="button" value="检测里面数字">
+	<span></span>
+	<script>
+		var oText = document.getElementsByTagName("input")[0];
+		var oBtn = document.getElementsByTagName("input")[1];
+		var oSpan = document.getElementsByTagName("span")[0];
+		var re = /\d/;
+		var a = [];
+		oBtn.onclick = function(){
+			var str = oText.value;
+			oSpan.innerHTML = oText.value.match(re);
+			// oSpan.innerHTML = oText.value.match(/\d/g);
+			// oSpan.innerHTML = oText.value.match("a");
+		}
+	</script>
+</body>
+</html>

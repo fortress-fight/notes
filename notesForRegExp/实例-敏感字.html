@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="text">
+	<script>
+		var s = '啊啊啊啊凄凄切切我问问呃呃呃';
+		var re = /凄凄切切|问问/g;
+		var str = s.replace(re, function ($0) {
+			var rest = $0.replace(/\W|w/g, '*')
+			console.log(rest)
+			return rest;
+		})
+		console.log(str);
+	</script>
+</body>
+</html>

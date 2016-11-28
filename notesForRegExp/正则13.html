@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		textarea {
+			width: 200px;
+			height: 100px;
+			resize: none;
+			border: 2px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<textarea></textarea>
+		<input type="button" value="转换">
+		<textarea></textarea>
+	</div>
+	<script>
+		var oText = document.getElementsByTagName("textarea");
+		var oBtn = document.getElementsByTagName("input")[0];
+		var a = [];
+		var re = /(a)(b)(c)/
+		oBtn.onclick = function(){
+			oText[1].value = "abc".match(re);
+		}
+	</script>
+</body>
+</html>

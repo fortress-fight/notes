@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="text">
+	<div>
+		<em>点击document</em>
+		<em>11111111</em>
+		<em>11111111</em>
+	</div>
+	<script>
+		var str = '1212ab1';
+		var re = /\w/;
+		var s = str.replace(re, "$'");
+			console.log(s)
+		var str = '1212ab1';
+		var re = /\w/;
+		var s = str.replace(re, "$&");
+			console.log(s)
+		var str = '1212ab1';
+		var re = /\d/g;
+		var s = str.replace(re, "$$");
+		console.log(s)
+	</script>
+</body>
+</html>

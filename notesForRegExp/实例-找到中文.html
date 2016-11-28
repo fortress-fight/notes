@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="text">
+	<script>
+	/*中文3个字节，英文标点空格一个字节，计算 一共有多少个字节*/
+
+		var str = '你好世界，Hello'
+		var num = 0;
+		for (var i = 0; i < str.length; i++) {
+			if(/[\u4e00-\u9fa5]/.test(str[i])){
+				num +=3 ;
+			} else {
+				num++;
+			}
+		}
+		console.log(num)
+	</script>
+</body>
+</html>

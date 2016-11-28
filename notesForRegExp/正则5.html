@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<input type="text">
+		<input type="button" value="检测里面数字"><br/>
+		<strong>oText.value.match(re):</strong><span></span><br/>
+		<strong>oText.value.match(re).index:</strong><span></span><br/>
+		<strong>oText.value.match(re).input:</strong><span></span><br/>
+	</div>
+	<script>
+		var oText = document.getElementsByTagName("input")[0];
+		var oBtn = document.getElementsByTagName("input")[1];
+		var oSpan = document.getElementsByTagName("span");
+		var re = /\d+/;
+		var a = [];
+		oBtn.onclick = function(){
+			var str = oText.value;
+			oSpan[0].innerHTML = oText.value.match(re);
+			oSpan[1].innerHTML = oText.value.match(re).index;
+			oSpan[2].innerHTML = oText.value.match(re).input;
+			// oSpan.innerHTML = oText.value.match(/\d/g);
+			// oSpan.innerHTML = oText.value.match("a");
+		}
+	</script>
+</body>
+</html>

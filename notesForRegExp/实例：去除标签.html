@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="text">
+	<div>
+		<em>点击document</em>
+		<em>11111111</em>
+		<em>11111111</em>
+	</div>
+	<script>
+		var target = document.querySelector('div')
+		var a = target.innerHTML;
+		var re = /<[^>]+>/g;
+		var s = a.replace(re,'');
+		document.onclick = function () {
+				
+			target.innerHTML = s;
+		}
+	</script>
+</body>
+</html>

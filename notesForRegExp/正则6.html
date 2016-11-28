@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<input type="text">
+		<input type="button" value="var re = /.(?=\.)/g;"><br/>
+		<strong>oText.value.match(re)--检测里面在'.'前面紧跟的字符 :</strong><span></span><br/>
+	</div>
+	<script>
+		var oText = document.getElementsByTagName("input")[0];
+		var oBtn = document.getElementsByTagName("input")[1];
+		var oSpan = document.getElementsByTagName("span");
+		var re = /.(?=\.)/g;
+		var a = [];
+		oBtn.onclick = function(){
+			var str = oText.value;
+			oSpan[0].innerHTML = oText.value.match(re);
+		}
+	</script>
+</body>
+</html>

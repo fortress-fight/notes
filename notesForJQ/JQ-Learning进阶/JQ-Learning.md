@@ -164,6 +164,7 @@ add : 在一组元素中，加入另一个元素，会形成一个新的集合
 10) 数据的串联
 
 serialize() || serializeArray()
+将form中的value值进行数据串联；
 
 ```
     <script>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<input type="text">
+	<script>
+		var s = '122aaa 1212bbb12ccc';
+		var re = /a\b/g;
+		var str = s.match(re);
+		// 能匹配最后的a，因为a在单词的边界
+		console.log(str);
+	</script>
+</body>
+</html>

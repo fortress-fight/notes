@@ -9,70 +9,139 @@ h6,
 dl,
 dd,
 form {
-  margin: 0; }
+  margin: 0;
+}
 
 ul,
 ol {
   margin: 0;
   padding: 0;
-  list-style: none; }
+  list-style: none;
+}
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 img {
   border: none;
-  vertical-align: top; }
+  vertical-align: top;
+}
 
 input,
 textarea {
   margin: 0;
   padding: 0;
-  outline: none; }
+  outline: none;
+}
 
 select {
-  outline: none; }
+  outline: none;
+}
 
 textarea {
   resize: none;
-  overflow: auto; }
+  overflow: auto;
+}
 
 table {
-  border-collapse: collapse; }
+  border-collapse: collapse;
+}
 
 th,
 td {
-  padding: 0; }
+  padding: 0;
+}
 
 a,
 input,
 button {
-  -webkit-tap-hightlight-color: transparent; }
+  -webkit-tap-hightlight-color: transparent;
+}
 
 input,
 button {
   -webkit-appearance: none;
-  border-radius: 0; }
+  border-radius: 0;
+}
 
 body {
-  font-family: Helvetica; }
+  font-family: Helvetica;
+}
 
 body * {
   -webkit-text-size-adjust: 100%;
-  -webkit-user-select: none; }
+  -webkit-user-select: none;
+}
 
 header {
   height: 2.06rem;
   background: #ef3239;
-  position: relative; }
-  header a {
-    width: 2.56rem;
-    height: 1.76rem;
-    position: absolute;
-    top: 0; }
-  header #task {
-    left: 0; }
-  header #refrash {
-    right: 0; }
+  position: relative;
+  box-sizing: border-box;
+  border-bottom: 0.02rem solid #b2b2b2;
+}
+header a {
+  width: 2.08rem;
+  height: 1.76rem;
+  position: absolute;
+  top: 0;
+  line-height: 1.76rem;
+  text-align: center;
+}
+header #task {
+  left: 0;
+}
+header #task span {
+  font-size: 0.74rem;
+}
+header #refrash {
+  right: 0;
+}
+header #refrash span {
+  font-size: 0.72rem;
+}
+header span {
+  color: #fff;
+}
+header h1 {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #fff;
+  line-height: 1.76rem;
+}
+header h1 span {
+  font-size: 0.52rem;
+  margin-right: 0.32rem;
+}
+
+#nav {
+  height: 2.1rem;
+  background-color: #fbfbfb;
+  border-top: 1px solid #b0b0b0;
+  border-bottom: 1px solid #cccccc;
+  box-sizing: border-box;
+}
+#nav a {
+  float: left;
+  width: 25%;
+  height: 2.06rem;
+  text-align: center;
+  line-height: 2.06rem;
+  color: #848689;
+  font-size: 0.7rem;
+}
+#nav .active {
+  color: #f23838;
+}
+#nav #spanBox {
+  width: 0.74rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+#nav #spanBox span {
+  float: right;
+}
 
 /*# sourceMappingURL=index.css.map */

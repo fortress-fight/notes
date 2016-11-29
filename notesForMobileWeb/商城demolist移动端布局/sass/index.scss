@@ -1,8 +1,9 @@
 
-body,@function r ($px) {
+@function r ($px) {
 	@return $px / 50 + rem;
 }
 
+body,
 p,
 h1,
 h2,
@@ -76,16 +77,69 @@ header {
 	height: r(103);
 	background: #ef3239;
 	position: relative;
+	box-sizing: border-box;
+	border-bottom: r(1) solid #b2b2b2;
 	a {
-		width: r(128);
+		width: r(104);
 		height: r(88);
 		position: absolute;
 		top: 0;
+		line-height: r(88);
+		text-align: center;
 	}
 	#task {
 		left: 0;
+		span {
+			font-size: r(37);
+		}
 	}
 	#refrash {
 		right: 0;
+		span {
+			font-size: r(36);
+		}
+	}
+	span {
+		color: #fff;
+	}
+	h1 {
+		text-align: center;
+		font-size: r(39);
+		color: #fff;
+		line-height: r(88);
+		span {
+			font-size: r(26);
+			margin-right: r(16);
+		}
 	}
 }
+
+#nav {
+	height: r(105);
+	background-color: #fbfbfb;
+	border-top: 1px solid #b0b0b0;
+	border-bottom: 1px solid #cccccc;
+	box-sizing: border-box;
+	a {
+		float: left;
+		width: 25%;
+		height: r(103);
+		text-align: center;
+		line-height: r(103);
+		color: #848689;
+		font-size: r(35);
+	}
+	.active {
+		color: #f23838;
+	}
+	#spanBox {
+		width: r(37);
+		display: inline-block;
+		vertical-align: middle;
+		text-align: center;
+		span {
+			float: right;
+		}
+	}
+}
+

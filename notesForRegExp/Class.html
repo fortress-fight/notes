@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		li {
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li class="li active"></li>
+		<li></li>
+		<li class="li"></li>
+		<li class="active"></li>
+		<li></li>
+	</ul>
+	<script>
+		/*var ul = document.getElementsByTagName('ul')[0];
+		var li = document.getElementsByClassName('li');
+		for (var i = 0; i < li.length; i++) {
+			li[i].style.background = 'red';
+		}*/
+
+		/*var ul = document.getElementsByTagName('ul')[0];
+		var lis = ul.children;
+
+		for (var i = 0; i < lis.length; i++) {
+			if (lis[i].className == 'li') {
+				lis[i].style.background = 'red';
+			}
+		}*/
+
+		/*
+		var setClassName = {
+			getClassName: function (tagName, className, parent) {
+				var parent = parent || document;
+				var aEl = parent.getElementsByTagName(tagName);
+				var arr = [];
+				for (var i = 0; i < aEl.length; i++) {
+					var aClassName = aEl[i].className.split(' ');
+					for (var j = 0; j < aClassName.length; j++) {
+						if (aClassName[j] == className) {
+							arr.push(aEl[i]);
+							break;
+						}
+					}
+				}
+				return arr;
+			},
+
+			setClass: function (obj, className) {
+				if (obj.className == '') {
+					obj.className = className;
+				} else {
+					var aClassName = obj.className.split(' ');
+					var _index = arrIndexOf(aClassName, className);
+					console.log(_index)
+					if (_index == -1) {
+						aClassName += ' ' + className;
+					}
+				}
+				obj.className = aClassName;
+			},
+
+			removeClass: function (obj, className) {
+				var _index = arrIndexOf(obj, className);
+				var aClassName = obj.className.split(' ');
+				if (_index != -1) {
+					aClassName.splice(_index, 1);
+				}
+				obj.className = aClassName.join(' ');
+			}
+		}
+		function arrIndexOf (arr, v, index) {
+			var num = -1;
+			index = index ? index : 0;
+			for (var i = index; i < arr.length; i++) {
+				if (arr[i] == v) {
+					num = i;
+				}
+			}
+			return num;
+		}
+
+
+
+		 */
+	</script>
+</body>
+</html>

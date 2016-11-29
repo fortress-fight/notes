@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#in-put {
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="in-put">
+	<input type="button" id="btn">
+	<script>
+		var str = '121 adc de化 滑稽 -—— ， 。 , _';
+		var re = /\b/g;
+		var str1 = str.replace(re, '|');
+		console.log(str1); //|121| |adc| |de|化 滑稽 -—— ， 。 , |_|
+	</script>
+</body>
+</html>

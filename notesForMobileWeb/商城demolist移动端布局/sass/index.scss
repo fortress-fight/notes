@@ -1,8 +1,8 @@
-@function r ($px) {
+
+body,@function r ($px) {
 	@return $px / 50 + rem;
 }
 
-body,
 p,
 h1,
 h2,

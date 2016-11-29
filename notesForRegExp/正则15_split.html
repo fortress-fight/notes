@@ -3,15 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style>
+		#in-put {
+			background: red;
+		}
+	</style>
 </head>
 <body>
-	<input type="text" id="input">
+	<input type="text" id="in-put">
 	<input type="button" id="btn">
 	<script>
+
+
 		var a = '12asdf23asdf123sadf12';
 		var reg = /\d+/g;
 		var b = a.split(reg);
-		alert(b + '  ' +a)
+		// ,asdf,asdf,sadf,  12asdf23asdf123sadf12
 	</script>
 </body>
 </html>

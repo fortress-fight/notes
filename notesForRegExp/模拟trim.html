@@ -13,14 +13,23 @@
 		<em>11111111</em>
 	</div>
 	<script>
-		var str = 'abd.cn.cn'
-		// var re = /((.com)|(.cn)|(.com.cn))$/;
-		// var re = /(.com|.cn|.com.cn)$/;
+		var str = 11111222111111;
+		var re = /^[1-9]\d{4,10}$/;
 
-		var re = /\w{3}(.com|.com.cn|.cn)$/;
-		// var re = /(.com)$|(.cn)$|(.com.cn)$/;
+
+
+		var str1 = '        123          '
+		var re = /^\s*|\s*$/g
+		var str2 = str1.replace(re, '');
+		console.log(str2)
+		alert(str2.length)
+
+
+
+
+
+
 		alert(re.test(str));
-
 	</script>
 </body>
 </html>

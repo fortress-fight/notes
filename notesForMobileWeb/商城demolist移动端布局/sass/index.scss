@@ -73,10 +73,18 @@ body * {
 }
 
 
+body,
+html {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
 header {
+	width: 100%;
 	height: r(103);
 	background: #ef3239;
-	position: relative;
+	position: absolute;
+	top: 0; left: 0;
 	box-sizing: border-box;
 	border-bottom: r(1) solid #b2b2b2;
 	a {
@@ -115,11 +123,15 @@ header {
 }
 
 #nav {
+	width: 100%;
 	height: r(105);
 	background-color: #fbfbfb;
 	border-top: 1px solid #b0b0b0;
 	border-bottom: 1px solid #cccccc;
 	box-sizing: border-box;
+	position: absolute;
+	top: r(103);
+	left: 0;
 	a {
 		float: left;
 		width: 25%;
@@ -131,6 +143,9 @@ header {
 	}
 	.active {
 		color: #f23838;
+		span {
+			font-size: r(36);
+		}
 	}
 	#spanBox {
 		width: r(37);
@@ -139,7 +154,60 @@ header {
 		text-align: center;
 		span {
 			float: right;
+			font-size: r(28);
 		}
+		.glyphicon-chevron-down {
+			left: r(-2);
+			top: r(-2);
+		}
+	}
+	.glyphicon-filter {
+		font-size: r(37);
+		top: r(3);
 	}
 }
 
+#list {
+	position: absolute;
+	left: 0; right:0; top: r(208); bottom: 0;
+	overflow: auto;
+	li {
+		height: r(281);
+		border-bottom: 1px solid #e0e0e0;
+		box-sizing: border-box;
+	}
+	img {
+		float: left;
+		height: r(235);
+		width: r(235);
+	}
+	a {
+		padding: r(23);
+		height: r(235);
+		float: left;
+	}
+	.spanWrap {
+		width: r(432);
+		float: right;
+		span {
+			color: #333;
+			display: block;
+		}
+		.sTitle {
+			line-height: r(44);
+			font-size: r(28);
+			margin-top: r(5);
+		}
+		.sPrice {
+			line-height: r(64);
+			font-size: r(38);
+			margin-top: r(23);
+			color: #23838a;
+		}
+		.sComment {
+			font-size: r(28);
+			line-height: r(47);
+			display: block;
+		}
+	}
+}

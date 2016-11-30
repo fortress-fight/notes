@@ -162,6 +162,21 @@ viewport -- 视口，用于设置可视区窗口的属性，默认不设置viewp
 ### 1.5.7 固定定位
 
 固定定位在移动端上支持性不好，需要通过js解决
+可以使用css模拟，
+```
+    body,
+    html {
+        width: 100%;
+        height: 100%
+        overflow: hidden;
+    }
+    div {
+        postition: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        <!-- 还需要调节具体位置 -->
+    }
+```
+css模拟的缺陷：在部分手机上有卡顿，有下拉上拉回弹；
 
 ### 1.5.8 在ios下，body的`overflow：hidden`横向无效
 

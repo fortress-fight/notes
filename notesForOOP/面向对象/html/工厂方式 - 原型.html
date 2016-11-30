@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function createName (name) {
+			this.name = name;
+		}
+
+		createName.prototype.showName = function () {
+			alert(this.name);
+		}
+
+		var xm = new createName('小明');
+		xm.showName();
+
+		var xq = new createName('小强');
+		xq.showName();
+
+	</script>
+
+</body>
+</html>

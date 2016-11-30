@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box div {
+			width: 300px;
+			height: 300px;
+			border: 1px solid black;
+			display: none;
+		}
+		.active {
+			background: red;
+		}
+		.box .show {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1" class="box">
+		<input type="button" class="active" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="show">001</div>
+		<div>002</div>
+		<div>003</div>
+	</div>
+	<div id="box2" class="box">
+		<input type="button" class="active" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="show">001</div>
+		<div>002</div>
+		<div>003</div>
+	</div>
+	<script>
+		// (function () {
+		// 	Tab();
+		// 	var box;
+		// 	var input;
+		// 	var aDiv;
+		// 	function Tab () {
+		// 		 box = document.querySelector('#box');
+		// 		 input = document.getElementsByTagName('input');
+		// 		 aDiv = box.getElementsByTagName('div');
+		// 		 init();
+		// 	}
+		// 	function init () {
+		// 		for (var i = 0; i < input.length; i++) {
+		// 			input[i].index = i;
+		// 			input[i].onclick = start;
+		// 		}
+		// 	}
+		// 	function start () {
+		// 		for (var j = 0; j < aDiv.length; j++) {
+		// 			input[j].className = '';
+		// 			aDiv[j].style.display = 'none';
+		// 		}
+		// 		this.className = 'active';
+		// 		aDiv[this.index].style.display = 'block';
+		// 	}
+		// })()
+		(function () {
+			window.onload = function () {
+				var t1 = new Tab('box1');
+				t1.init();
+				var t2 = new Tab('box2');
+				t2.autoPlay();
+				t2.init();
+			}
+			function Tab (id) {
+				this.box = document.getElementById(id);
+				this.input = this.box.getElementsByTagName('input');
+				this.aDiv = this.box.getElementsByTagName('div');
+				this.now = 0;
+			}
+			Tab.prototype.init = function () {
+				console.log(1)
+				var _this = this;
+				for (var i = 0; i < this.input.length; i++) {
+					this.input[i].index = i;
+					this.input[i].onclick = function () {
+						_this.now = this.index;
+						_this.start(this);
+					};
+				}
+			}
+			Tab.prototype.start = function (obj) {
+				for (var j = 0; j < this.aDiv.length; j++) {
+					this.input[j].className = '';
+					this.aDiv[j].style.display = 'none';
+				}
+				obj.className = 'active';
+				this.aDiv[obj.index].style.display = 'block';
+			},
+			Tab.prototype.autoPlay = function () {
+				var _this = this;
+				setInterval(function () {
+					_this.now ++;
+					_this.now = _this.now % _this.input.length;
+					for (var j = 0; j < _this.aDiv.length; j++) {
+						_this.input[j].className = '';
+						_this.aDiv[j].style.display = 'none';
+					}
+					_this.input[_this.now].className = 'active';
+					_this.aDiv[_this.now].style.display = 'block';
+				}, 500);
+			}
+		})();
+	</script>
+</body>
+</html>

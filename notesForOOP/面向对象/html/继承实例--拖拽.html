@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1 {
+			width: 200px;
+			height: 200px;
+			background: #58a;
+			position: absolute;
+			top: 0; left: 0;
+		}
+		#div2 {
+			width: 200px;
+			height: 200px;
+			background: #fb3;
+			position: absolute;
+			top: 100px;
+			left: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<script>
+        window.onload = function () {
+            var a = new Drag('div1');
+            a.init();
+            var d2 = new dragLimit('div2')
+            console.log(d2.fnMove)
+            d2.init();
+        }
+
+        function Drag (id) {
+            this.obj = document.getElementById(id);
+            this.disX = 0;
+            this.disY = 0;
+        };
+
+        Drag.prototype.init = function () {
+            var _this = this;
+            this.obj.onmousedown = function (ev) {
+                var ev = ev || window.event;
+                _this.fnDown(ev);
+                return false;
+            }
+        }
+        Drag.prototype.fnDown = function (ev) {
+            var _this = this;
+            this.disX = ev.clientX - this.obj.offsetLeft;
+            this.disY = ev.clientY - this.obj.offsetTop;
+            document.onmousemove = function (ev) {
+                var ev = ev || window.event;
+                _this.fnMove(ev);
+            }
+            document.onmouseup = function () {
+                _this.fnUp();
+            }
+        }
+        Drag.prototype.fnMove = function (ev) {
+            this.obj.style.left = ev.clientX - this.disX + 'px';
+            this.obj.style.top = ev.clientY - this.disY + 'px';
+        }
+        Drag.prototype.fnUp = function () {
+            document.onmousemove = document.onmouseup = null;
+        }
+
+        function dragLimit (id) {
+            Drag.call(this, id);
+        }
+
+        for (attr in Drag.prototype) {
+            dragLimit.prototype[attr] = Drag.prototype[attr];
+        }
+        dragLimit.prototype.fnMove = function (ev) {
+            var targetX = Math.max(0, ev.clientX - this.disX)
+            var targetY = Math.max(0, ev.clientY - this.disY)
+            console.log(window.innerWidth - this.obj.offsetWidth)
+            if (targetX > (window.innerWidth - this.obj.offsetWidth)) {
+                targetX = (window.innerWidth - this.obj.offsetWidth)
+            }
+            if (targetY > (window.innerHeight - this.obj.offsetHeight)) {
+                targetY = (window.innerHeight - this.obj.offsetHeight)
+            }
+            this.obj.style.left = targetX + 'px';
+            this.obj.style.top = targetY + 'px';
+        }
+    </script>
+</body>
+</html>

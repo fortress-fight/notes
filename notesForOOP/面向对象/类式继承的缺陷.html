@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <script>
+        function create (name) {
+            this.name = '小明';
+        }
+
+        create.prototype.showName = function () {
+         alert(this.name)
+        }
+
+        function creatS () {
+            create.call(this);
+        }
+
+        creatS.prototype = new create;
+
+         function creatA () {
+            create.call(this);
+        }
+
+        creatA.prototype = new create;
+
+        creatS.prototype.showName = function () {
+            alert(1);
+        }
+
+        var a = new creatS;
+        var b = new creatA;
+
+
+        a.showName = function () {
+            alert(1);
+        }
+
+
+        // alert(a.name)
+        a.showName()
+        b.showName()
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <script>
+        var a = {
+            name: [123]
+        };
+
+        var b = clone(a);
+        var c = clone(a);
+        function clone (obj) {
+            var f = function() {};
+            f.prototype = obj;
+            return new f();
+        }
+       b.name.push(9)
+        alert(b.name) // [123,9]
+        alert(a.name) // [123,9]
+        alert(c.name) // [123,9]
+    </script>
+</body>
+</html>

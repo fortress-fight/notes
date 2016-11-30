@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <script>
+        function creat (name) {
+            this.name = name;
+        }
+        creat.prototype.showName = function(){
+            var job = 'teacher';
+            alert(this.name + job)
+        };
+
+        var a = new creat('小明');
+        var b = new creat('小包');
+        a.showName();
+        b.showName();
+
+    </script>
+</body>
+</html>

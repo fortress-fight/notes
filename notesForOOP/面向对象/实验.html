@@ -6,18 +6,49 @@
 </head>
 <body>
 	 <script>
+     /* 证明  c.prototype = new creat; 仅仅是将creat挂在c的原型连上而不是简单的赋值*/
         function creat (name) {
             this.name = name;
         }
         creat.prototype.showName = function(){
             var job = 'teacher';
-            alert(this.name + job)
+            alert(job)
         };
 
-        var a = new creat('小明');
-        var b = new creat('小包');
+        function c () {
+
+        }
+
+        c.prototype = new creat;
+
+        c.prototype.showName = function(){
+            alert(1)
+        };
+
+        var a = new creat;
+        var b = new c;
+
         a.showName();
         b.showName();
+        console.dir(b)
+
+
+
+        c.prototype = creat.prototype;
+        var d = new c;
+        console.dir(d);
+
+        c.prototype.showName = function(){
+            alert(1)
+        };
+
+        a.showName();
+        d.showName();
+        
+        /*
+        c__proto__: creatname: undefinedshowName: ()__proto__: Objectconstructor: creat(name)showName: ()__proto__: Object
+         */
+
 
     </script>
 </body>

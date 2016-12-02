@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 200px;
+			height: 200px;
+			border: 1px solid black;
+			position: absolute;
+			top: 0; left: 0;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1"></div>
+	<script>
+		function drag (id) {
+			this.obj = document.getElementById(id);
+			console.log(this)
+			this.init();
+		}
+		drag.prototype.init = function(){
+			var _this = this;
+			this.obj.addEventListener('mousedown', fn)
+			function fn (ev) {
+			function fn (ev) {
+				var ev = ev || window.ev;
+				_this.fnDown(ev)
+			}
+		};
+		drag.prototype.fnDown = function(ev){
+			var _this = this;
+			this.disX = ev.pageX - this.obj.offsetLeft;
+			this.disY = ev.pageY - this.obj.offsetTop;
+			document.addEventListener('mousemove', fn);
+			document.addEventListener('mouseup', fn1);
+			function fn (ev) {
+				var ev = ev || window.ev;
+				_this.fnMove(ev)
+			}
+			function fn1 (ev) {
+				var ev = ev || window.ev;
+				_this.fnUp(ev,fn, fn1)
+			}
+			return false;
+		};
+		drag.prototype.fnMove = function(ev){
+			console.log('')
+			this.obj.style.left = ev.pageX - this.disX + 'px';
+			this.obj.style.top = ev.pageY - this.disY + 'px';
+		};
+
+		drag.prototype.fnUp = function(ev,fn, fn1){
+			document.removeEventListener('mousemove', fn)
+			document.removeEventListener('mouseup', fn1)
+		};
+
+		drag.prototype.addEvent = function(obj, ev, fn){
+			var _this = this;
+			obj.addEventListener(ev, fn1);
+			function fn1 (ev, fn1) {
+				fn.call(_this, ev, fn1);
+			}
+		};
+
+		var box1 = new drag('box1');
+	</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.wrap div {
+			width: 200px;
+			height: 200px;
+			border: 1px solid black;
+			display: none;
+		}
+		.wrap div.active {
+			display: block;
+		}
+		.wrap input.active {
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="inputGroup">
+		<input type="button" value="按钮1">
+		<input type="button" value="按钮2">
+		<input type="button" value="按钮3">
+		<input type="button" value="按钮4">
+	</div>
+	<div id="wrap1" class="wrap">
+		<input type="button" value="1" class="active">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="active">box1</div>
+		<div>box2</div>
+		<div>box3</div>
+	</div>
+	<div id="wrap2" class="wrap">
+		<input type="button" value="1" class="active">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="active">box1</div>
+		<div>box2</div>
+		<div>box3</div>
+	</div>
+	<script>
+		var timer = setInterval(function () {
+			console.log(1)
+		}, 1000)
+		clearInterval(timer);
+		alert(timer)
+	</script>
+</body>
+</html>

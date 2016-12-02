@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <script>
+     /* 证明  c.prototype = new creat; 仅仅是将creat挂在c的原型连上而不是简单的赋值*/
+        
+          function creat (name) {
+            this.name = name;
+        }
+        creat.prototype.showName = function(){
+            var job = 'teacher';
+            alert(job)
+        };
+
+        function c () {
+
+        }
+
+        c.prototype = creat.prototype;
+
+        c.prototype.showName = function(){
+            alert(1)
+        };
+
+        var a = new creat;
+        var b = new c;
+
+        a.showName();
+        b.showName();
+        console.dir(a)
+
+
+        console.dir(b)
+
+        /*
+        __proto__:Object 直接c.prototype = creat.prototype;导致查看到的即是子构造函数，也是父构造函数
+
+        constructor:creat(name)
+        showName:()
+        __proto__:Object
+                 */
+
+
+
+
+
+    </script>
+</body>
+</html>

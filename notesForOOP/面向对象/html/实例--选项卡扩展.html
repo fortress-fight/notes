@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.wrap div {
+			width: 200px;
+			height: 200px;
+			border: 1px solid black;
+			display: none;
+		}
+		.wrap div.active {
+			display: block;
+		}
+		.wrap input.active {
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="inputGroup">
+		<input type="button" value="按钮1">
+		<input type="button" value="按钮2">
+		<input type="button" value="按钮3">
+		<input type="button" value="按钮4">
+	</div>
+	<div id="wrap1" class="wrap">
+		<input type="button" value="1" class="active">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="active">box1</div>
+		<div>box2</div>
+		<div>box3</div>
+	</div>
+	<div id="wrap2" class="wrap">
+		<input type="button" value="1" class="active">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="active">box1</div>
+		<div>box2</div>
+		<div>box3</div>
+	</div>
+	<script>
+		function Tab (id) {
+			this.obj = document.getElementById(id);
+			this.btns = this.obj.getElementsByTagName('input');
+			this.divs = this.obj.getElementsByTagName('div');
+			this.init();
+		}
+		Tab.prototype.init = function(){
+			var _this = this;
+			this.timer = null;
+			this.num = 0;
+			for (var i = 0; i < this.btns.length; i++) {
+				this.btns[i].index = i;
+				this.btns[i].onclick = function () {
+					_this.num = this.index;
+					_this.click(_this.num);
+				}
+			}
+		};
+		Tab.prototype.click = function (index) {
+			this.clear();
+			this.btns[index].className = 'active';
+			this.divs[index].className = 'active';
+		}
+		Tab.prototype.clear = function(){
+			for (var i = 0; i < this.btns.length; i++) {
+				this.btns[i].className = '';
+			}
+			for (var i = 0; i < this.divs.length; i++) {
+				this.divs[i].className = '';
+			}
+		};
+
+		Tab.prototype.autoPlay = function(){
+			var _this = this;
+			this.onOff = true;
+			clearInterval(this.timer)
+
+			this.timer = setInterval(function () {
+				_this.num ++;
+				_this.checkNum();
+				_this.click(_this.num);
+			}, 1000)
+		};
+
+		Tab.prototype.checkNum = function(){
+			if (this.num >= this.btns.length) {
+				this.num = 0;
+			};
+		};
+
+		Tab.prototype.stop = function(){
+			this.onOff = false;
+			clearInterval(this.timer);
+		};
+
+		Tab.prototype.reverse = function(){
+			return this.onOff;
+		};
+
+
+		window.onload = function () {
+
+			var bWrap = document.getElementById('inputGroup');
+			var btns = bWrap.getElementsByTagName('input');
+
+			var wrap1 = new Tab('wrap1')
+			var wrap2 = new Tab('wrap2')
+
+			btns[0].onclick = function () {
+				wrap1.autoPlay();
+				wrap2.autoPlay();
+			}
+			
+			btns[1].onclick = function () {
+				wrap1.stop();
+				wrap2.autoPlay();
+			}
+
+			btns[2].onclick = function () {
+				wrap1.stop();
+				wrap2.stop();
+			}
+
+			btns[3].onclick = function () {
+				if (wrap1.reverse()) {
+					wrap1.stop();
+				} else {
+					wrap1.autoPlay();
+				}
+				if (wrap2.reverse()) {
+					wrap2.stop();
+				} else {
+					wrap2.autoPlay();
+				}
+			}
+		}
+
+	</script>
+</body>
+</html>

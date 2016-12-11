@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<ul>
+		<li class="active"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+	</ul>
+	<script src="jquery-3.1.1.js"></script>
+	<script>
+		$('ul').find('.active').click(function () {
+			$(this).removeClass('active');
+		})
+	</script>
+</body>

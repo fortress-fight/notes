@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var Type = {};
+
+		for (var i = 0, type; type = ['String', 'Array', 'Object', 'Function', 'Number'][i++];) {
+			Type['is'+type] = (function (type) {
+				return function (obj) {
+					return Object.prototype.toString.call(obj) == '[object '+ type +']';
+				}
+			})(type)
+		}
+
+		var a = [];
+		alert(Type.isArray(a));
+	</script>
+</body>
+</html>

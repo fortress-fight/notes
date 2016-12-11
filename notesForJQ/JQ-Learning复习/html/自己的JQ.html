@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<ul>
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<!-- <script src="jquery-3.1.1.min.js"></script> -->
+	<script src = 'sizzle.js'></script>
+	<script>
+		;(function(global, factory){
+			factory(global);
+		})(typeof window !== 'undefined' ? window:this, function (global, noGlobal) {
+			function jQuery (selector) {
+				return new jQuery.init(selector);
+			};
+			jQuery.prototype = {
+				constructor: jQuery,
+				css: function  () {
+					if (arguments.length == 1) {
+						if (typeof arguments[0] === 'object') {
+							for (var i = 0; i < this.length; i++) {
+								for (attr in arguments[0]) {
+									this[i].style[attr] = arguments[0][attr];
+									console.log(attr)
+								}
+							}
+							return this;
+						} else {
+							return this[0].style[arguments[0]];
+						}
+					} else {
+						for (var i = 0; i < this.length; i++) {
+							this[i].style[arguments[0]] = arguments[1];
+						}
+						return this;
+					}
+				}
+			};
+			jQuery.init = function (selector) {
+				var arr = [];
+				/*typeof 性能好 不准确， toStrong 准确 性能不好*/
+				if (typeof selector === 'function') {
+					/*这里就是指当DOM加载完成后，就执行selector函数*/
+					document.addEventListener('DOMContentLoaded', selector);
+				} else if (selector.nodeType === 1) {
+					// 如果传入的是一个元素节点，直接返回
+					console.log(selector);
+					arr.push(selector);
+					this[0] = selector;
+					this.length  = arr.length;
+					// return arr;
+				} else if (typeof selector === 'string') {
+					// 返回一个数组
+					 arr = Sizzle(selector);
+					for (var i = 0; i < arr.length; i++) {
+						this[i] = arr[i];
+					}
+					this.length  = arr.length;
+				}
+			};
+
+			jQuery.init.prototype = jQuery.prototype;
+			window.$ = jQuery;
+		});
+
+		// $('li').css('width', '200px');
+
+		$($('li')[0]).css({
+			width: '200px'
+		}).css ({
+			height: '200px'
+		})
+
+	</script>
+</body>

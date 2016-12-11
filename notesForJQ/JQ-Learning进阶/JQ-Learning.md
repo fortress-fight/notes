@@ -61,7 +61,7 @@ $(function(){}) 的第二中写法 $(document).ready(function(){})
 
 ## 3. DOM操作：
 
-parents() || closest() || siblings() || nextAll() || prevAll() || parentUtile() || clone() || wrap() || wrapAll() || wrapInner() || unwrap() || add() || serialize() || serializeArray() || slice()
+parents() || closest() || siblings() || nextAll() || prevAll() || parentUtile() || clone() || wrap() || wrapAll() || wrapInner() || unwrap() || add() || serialize() || serializeArray() || slice() || next() || prev() || children();
 
 1）parents() 得到所有的祖先节点,一直可以找到html,接受一个参数，表示查找的结束位置
 
@@ -186,6 +186,20 @@ serialize() || serializeArray()
          */
 
     </script>
+```
+
+11) next() || prev();
+
+12) children();
+中间可以接受一个参数，作为筛选条件
+
+13) find()
+找后代元素
+必须传入一个参数，作为筛选条件
+
+
+```
+    $(ul li a) 的性能 不如 $(ul).find(li).find(a); 因为 $(ul li a)是先找到a 再找到 具有li 的 再找到ul，
 ```
 
 ##4 JQ中的运动

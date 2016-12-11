@@ -269,7 +269,7 @@ outerWidth(true): width + padding + border + margin
 
 ### 4.2 节点相关：
 
-insertBefore() || before() || insetAfter() || after() || appendTo() || append() || prependTo() || prepend() || remove()
+insertBefore() || before() || insetAfter() || after() || appendTo() || append() || prependTo() || prepend() || remove() || children()
 
 insetAfter() -- 放到目标点后面；
 prependTo() -- 从前面插入；
@@ -296,6 +296,8 @@ prependTo() -- 从前面插入；
     })
 
 ```
+
+注：append 和 appendTo 的区别在于，在使用链式操作的时候，主对象的不同。
 
 
 ### 4.3 事件相关：

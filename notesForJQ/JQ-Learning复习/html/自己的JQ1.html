@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<ul>
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script src="sizzle.js"></script>
+	<script>
+		;(function(global, factory){
+			factory(global);
+		})(typeof window == 'undefined' ? window : this, function (global, noGlobal) {
+			function $ (selector) {
+				return new $.prototype.init(selector);
+			};
+
+			$.prototype = {
+				init: function (selector) {
+					if (typeof selector === 'function') {
+						document.addEventListener('DOMContentLoaded', selector, false);
+					} else if (selector.nodeType === 1) {
+						this[0] = selector;
+						this.length = 1;
+					} else if (typeof selector === 'string') {
+						arr = Sizzle(selector);
+						for (var i = 0; i < arr.length; i++) {
+							this[i] = arr[i];
+						}
+						this.length = arr.length;
+					}
+				},
+				css: function () {
+					if (arguments.length == 1) {
+						if (typeof arguments === 'object') {
+							for (var i = 0; i < this.length; i++) {
+								for (attr in arguments[0]) {
+									this[i].style[attr] = arguments[0][attr];
+								}
+							}
+							return this;
+						} else {
+							return this[0].style[arguments[0]];
+						} 
+					} else {
+						for (var i = 0; i < this.length; i++) {
+							this[i].style[arguments[0]] = arguments[1];
+						}
+						return this;
+					};
+				}
+			};
+
+			$.prototype.init.prototype = $.prototype;
+			window.$ = $;
+		});
+		$($('li')[0]).css({
+			width: '200px'
+		}).css({
+			height: '200px'
+		})
+	</script>
+</body>

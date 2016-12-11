@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function $ () {
+			return new $.prototype.init();
+		}
+
+		$.prototype = {
+			constructor: $,
+			init: function () {
+				alert(1);
+			}
+		}
+
+		$.prototype.init.prototype = $.prototype;
+
+		$(); // 1
+	</script>
+</body>
+</html>

@@ -369,14 +369,18 @@ jQuery.fn = jQuery.prototype = {
 // Give the init function the jQuery prototype for later instantiation
 jQuery.fn.init.prototype = jQuery.fn;
 
+// 扩展静态方法 和 扩展实例方法
 jQuery.extend = jQuery.fn.extend = function() {
 	var options, name, src, copy, copyIsArray, clone,
 		target = arguments[0] || {},
+		// 目标元素默认位置
 		i = 1,
 		length = arguments.length,
+		// 是否深拷贝
 		deep = false;
 
 	// Handle a deep copy situation
+	// 深拷贝：
 	if ( typeof target === "boolean" ) {
 		deep = target;
 		target = arguments[1] || {};
@@ -385,36 +389,45 @@ jQuery.extend = jQuery.fn.extend = function() {
 	}
 
 	// Handle case when target is a string or something (possible in deep copy)
+	// 查看参数是否正确
 	if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
 		target = {};
 	}
 
 	// extend jQuery itself if only one argument is passed
+	// 是否是扩展插件的行为
 	if ( length === i ) {
 		target = this;
 		--i;
 	}
 
+	// 可能有多个对象自变量的时候，通过循环扩展
 	for ( ; i < length; i++ ) {
 		// Only deal with non-null/undefined values
+		// 过滤出有值的参数
 		if ( (options = arguments[ i ]) != null ) {
 			// Extend the base object
+			// 对配置选项进行for in 循环
 			for ( name in options ) {
 				src = target[ name ];
 				copy = options[ name ];
 
 				// Prevent never-ending loop
+				// 如果产生了循环引用 就跳出；$.extend(a, {name: a}
 				if ( target === copy ) {
 					continue;
 				}
 
 				// Recurse if we're merging plain objects or arrays
+				// 深拷贝isPlainObject 是否是对象字面量
 				if ( deep && copy && ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) {
 					if ( copyIsArray ) {
+						// 数组
 						copyIsArray = false;
 						clone = src && jQuery.isArray(src) ? src : [];
 
 					} else {
+						// 对象 当本来就存在的时候，就走原来的否则就新创建一个对象
 						clone = src && jQuery.isPlainObject(src) ? src : {};
 					}
 
@@ -422,6 +435,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 					target[ name ] = jQuery.extend( deep, clone, copy );
 
 				// Don't bring in undefined values
+				// 浅拷贝
 				} else if ( copy !== undefined ) {
 					target[ name ] = copy;
 				}
@@ -432,6 +446,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 	// Return the modified object
 	return target;
 };
+/*jq中使用的是拷贝继承：因为拷贝继承的使用范围广*/
 
 jQuery.extend({
 	// Unique for each copy of jQuery on the page

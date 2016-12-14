@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = 'jquery-2.0.3.js'></script>
+</head>
+<body>
+	<script>
+		// $.extend()
+		// $.fn.extend()
+
+		// 当只写一个对象自变量的时候，jq中的扩展插件的形式
+		// 
+		$.extend({
+			aaa: function () {
+				alert(1);
+			},
+			bbb: function () {
+				alert(2);
+			}
+		});
+
+		$.aaa();
+		$.bbb();
+
+		$.fn.extend({
+			aaa: function () {
+				alert(3);
+			},
+			bbb: function () {
+				alert(4);
+			}
+		});
+
+		$().aaa();
+		$().bbb();
+
+		// $.extent: -> this -> $ -> 对象
+		// $.().extent: -> this -> $.prototype -> 对象
+
+		// 当写多个对象自变量的时候，后面的对象都是扩展到第一个对象身上的
+
+		var a = {};
+
+		$.extend(a, {name: 'hello'}, {age: 30})
+
+		console.log(a);
+		// Object {name: "hello", age: 30}age: 30name: "hello"__proto__: Object
+
+		// 深拷贝和潜拷贝（默认）：
+
+		// var a = {};
+		// var b = {name: 'hello'};
+
+		// $.extend(a, b);
+
+		// a.name = 'Hi';
+		// alert(b.name) // hello
+
+
+		// var a = {};
+		// var b = {name: {say: 'hello'}};
+
+		// $.extend(a, b);
+
+		// a.name.say = 'Hi';
+		// alert(b.name.say) // Hi
+
+		// var a = {};
+		// var b = {name: {say: 'hello'}};
+
+		// $.extend(true, a, b);
+
+		// a.name.say = 'Hi';
+		// alert(b.name.say) // hello
+
+
+		// 放置循环引用
+
+		// console.log($.extend(a, {name: a}));
+
+		// 深拷解释
+
+		var a = {name: {job: 'it'}};
+		var b = {name: {age: '30'}};
+
+		$.extend (true, a, b)
+		console.log(a);
+		// name:Objectage:"it"job:"30"__proto__:Object__proto__:Object
+
+		但是如果
+	</script>
+</body>
+</html>

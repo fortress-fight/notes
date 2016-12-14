@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no"/>
+		<title></title>
+		<script>
+		    (function(){
+		    	var html = document.documentElement;
+		    	var hWidth = html.getBoundingClientRect().width;
+//		    	console.log( hWidth );
+				html.style.fontSize = hWidth/16 + "px";
+		    })()
+		</script>
+		<style>
+			body{
+				margin: 0;
+			}
+			div{
+				float: left;
+				box-sizing: border-box;
+				width: 4rem;
+				height: 4rem;
+				border: 1px solid #000;
+			}
+			div:nth-of-type(1){
+				background-color: red;
+			}
+			div:nth-of-type(2){
+				background-color: yellow;
+			}
+			div:nth-of-type(3){
+				background-color: green;
+			}
+			div:nth-of-type(4){
+				background-color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			rem / em
+			root 根节点的字体大小进行计算的
+		-->
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</body>
+</html>

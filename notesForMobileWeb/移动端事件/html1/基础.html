@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1, user-scalable=no">
+	<script>
+		(function () {
+			var hWidth = document.documentElement.clientWidth;
+			document.documentElement.style.fontSize = hWidth/15 + 'px';
+		})()
+	</script>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div id="bug">body内容溢出的问题</div>
+	<div id="wrap">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+	</div>
+	<a href='https://www.baidu.com/' id="id">点透了</a>
+	<input type="text" id="input">
+	<script>
+		(function () {
+			document.addEventListener('touchstart', function (ev) {
+				ev.preventDefault();
+			})
+			var wrap = document.getElementById('wrap');
+			var id = document.getElementById('id');
+			// wrap.addEventListener('touchstart', touchDown, false);
+			function touchDown (ev) {
+				ev.preventDefault();
+				this.style.display = 'none';
+			}
+			id.addEventListener('touchstart', function () {
+				window.location.href = 'https://www.baidu.com/';
+			}, false);
+			wrap.ontouchstart = touchDown;
+
+			input.addEventListener('touchstart', function (ev) {
+				// ev.cancelBubble = true;
+			})
+
+			document.ontouchmove = function (ev) {
+				document.body.innerHTML = ev.targetTouches.length;
+			}
+
+		})()
+	</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1, user-scalable=no">
+	<script>
+		(function () {
+			var hWidth = document.documentElement.clientWidth;
+			document.documentElement.style.fontSize = hWidth/15 + 'px';
+		})()
+	</script>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<section>
+		<div id="wrap">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+		</div>
+		<nav>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+		</nav>
+	</section>
+	<script>
+		(function tab (global, factory) {
+			factory(global);
+		})(typeof window !== "undefined" ? window : this, function (global,noGlobal) {
+			function tab (selector) {
+				return new tab.prototype.inite(selector);
+			};
+			tab.prototype = {
+				constructor: tab,
+				inite: function (selector) {
+					this.obj = selector;
+				},
+				setLayOut: function () {
+					this.oneW = this.obj.parentNode.offsetWidth;
+					this.son = this.obj.children;
+					this.obj.style.width = this.son.length * this.oneW + 'px';
+					return this;
+				},
+				touchDown: function () {
+					var _this = this;
+					this.obj.addEventListener('touchstart', downEv);
+					function downEv (ev) {
+						ev = ev.targetTouches[0];
+						_this.downEv(ev);
+					};
+				},
+				downEv: function (ev) {
+					var _this = this;
+					this.obj.style.transition = '0s';
+					this.initX = ev.pageX - this.obj.offsetLeft;
+					document.addEventListener('touchmove', moveEv)
+					document.addEventListener('touchend', endEv)
+					function moveEv (ev) {
+						ev = ev.targetTouches[0];
+						_this.moveEv(ev);
+					};
+					function endEv () {
+						_this.endEv();
+					}
+				},
+				moveEv: function (ev) {
+					this.obj.style.left = ev.pageX - this.initX + 'px';
+
+				},
+				endEv: function (ev) {
+					this.obj.style.transition = '1s';
+					var num = Math.round(this.obj.offsetLeft / this.oneW);
+					console.log(this.oneW)
+					this.obj.style.left = num * this.oneW + 'px';
+				}
+			};
+			tab.prototype.inite.prototype = tab.prototype;
+			window.t = tab;
+		})
+		;(function(){
+			document.addEventListener('touchstart', function (ev) {
+				ev.preventDefault();
+			});
+			var wrap = document.getElementById('wrap');
+			t(wrap).setLayOut().touchDown();
+		})();
+	</script>
+</body>
+</html>

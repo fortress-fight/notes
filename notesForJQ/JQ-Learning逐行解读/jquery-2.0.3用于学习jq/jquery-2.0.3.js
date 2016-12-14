@@ -50,7 +50,7 @@ var
 	docElem = document.documentElement,
 
 	// Map over jQuery in case of overwrite
-	// _jQuery 和 _$ 是为了防止冲突的；待补充；
+	// _jQuery 和 _$ 是为了防止冲突的；在 noConflict
 	_jQuery = window.jQuery,
 
 	// Map over the $ in case of overwrite
@@ -122,7 +122,7 @@ var
 	},
 
 	// The ready event handler and self cleanup method
-	// DOM加载完成后执行的回调函数
+	// DOM加载完成后执行的回调函数,如果DOM加载完成或者load加载完成 执行ready
 	completed = function() {
 		document.removeEventListener( "DOMContentLoaded", completed, false );
 		window.removeEventListener( "load", completed, false );
@@ -321,6 +321,7 @@ jQuery.fn = jQuery.prototype = {
 	// DOM加载
 	ready: function( fn ) {
 		// Add the callback
+		// jQuery.ready.promise()创建一个延迟对象
 		jQuery.ready.promise().done( fn );
 
 		return this;
@@ -448,15 +449,20 @@ jQuery.extend = jQuery.fn.extend = function() {
 };
 /*jq中使用的是拷贝继承：因为拷贝继承的使用范围广*/
 
+// -----------------15------------------
 jQuery.extend({
 	// Unique for each copy of jQuery on the page
+	// 生成唯一的jq字符串，内部使用
 	expando: "jQuery" + ( core_version + Math.random() ).replace( /\D/g, "" ),
 
+	// 防止冲突
 	noConflict: function( deep ) {
+		// 交出$的使用权
 		if ( window.$ === jQuery ) {
 			window.$ = _$;
 		}
 
+		// 当deep为true交出jQuery的使用权
 		if ( deep && window.jQuery === jQuery ) {
 			window.jQuery = _jQuery;
 		}
@@ -472,8 +478,12 @@ jQuery.extend({
 	readyWait: 1,
 
 	// Hold (or release) the ready event
+
+	// 传true 推迟 ready的触发，传false就是释放ready
+	// 目的是异步加载js 避免由于使用DOMready带来的js引入的顺序原理
 	holdReady: function( hold ) {
 		if ( hold ) {
+			// 每次延迟就readyWaite++ 提供给ready使用
 			jQuery.readyWait++;
 		} else {
 			jQuery.ready( true );
@@ -484,11 +494,13 @@ jQuery.extend({
 	ready: function( wait ) {
 
 		// Abort if there are pending holds or we're already ready
+
 		if ( wait === true ? --jQuery.readyWait : jQuery.isReady ) {
 			return;
 		}
 
 		// Remember that the DOM is ready
+		// DOM准备完成
 		jQuery.isReady = true;
 
 		// If a normal DOM Ready event fired, decrement, and wait if need be
@@ -497,9 +509,13 @@ jQuery.extend({
 		}
 
 		// If there are functions bound, to execute
+		// 看是否已经完成
+		// 平时使用readyList.resolve(),resolveWith中第一个参数是this指向，第二个是参数，相当于apply
+		// 
 		readyList.resolveWith( document, [ jQuery ] );
 
 		// Trigger any bound ready events
+		// 先判断有没有主动触发的方法，如果有就使用document去触发ready事件
 		if ( jQuery.fn.trigger ) {
 			jQuery( document ).trigger("ready").off("ready");
 		}
@@ -919,26 +935,31 @@ jQuery.extend({
 });
 
 jQuery.ready.promise = function( obj ) {
+	// 只走一次
 	if ( !readyList ) {
-
+		// 创建一个延迟对象
 		readyList = jQuery.Deferred();
 
 		// Catch cases where $(document).ready() is called after the browser event has already occurred.
 		// we once tried to use readyState "interactive" here, but it caused issues like the one
 		// discovered by ChrisS here: http://bugs.jquery.com/ticket/12282#comment:15
+		// 无论是if 还是else 都是再走 $.ready方法；
+		// 如果为真 说明dom已经完成
 		if ( document.readyState === "complete" ) {
 			// Handle it asynchronously to allow scripts the opportunity to delay ready
+			// 加了一个延迟,保证在ie下能正常
 			setTimeout( jQuery.ready );
 
 		} else {
-
+			// 
 			// Use the handy event callback
 			document.addEventListener( "DOMContentLoaded", completed, false );
-
+			// 有缓存的话就会先load再完成DOM
 			// A fallback to window.onload, that will always work
 			window.addEventListener( "load", completed, false );
 		}
 	}
+	// promise 是状态不能修改
 	return readyList.promise( obj );
 };
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- <meta name = 'viewprot' content = 'width = device-width, user-scale = no, initial-scale = 1, minimum-scale = 1, maximum-scale-scale = 1'> -->
+</head>
+<body>
+	<script>
+		function setMobileMeta (target) {
+			var width = window.screen.width;
+			var targetW = target;
+			var scale = width/targetW;
+			var meta = documnet.createElement('meta');
+			meta.name = 'viewport';
+			meta.content = 'width = device-width, user-scale = no, initial-scale = '+ scale +', minimum-scale = '+ scale +', maximum-scale ='+ scale +'';
+		}
+	</script>
+</body>
+</html>

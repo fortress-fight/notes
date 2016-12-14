@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no"/>
+		<title></title>
+		<script>
+			(function(){
+				var html = document.documentElement;
+				var htmlWidth = html.getBoundingClientRect().width;
+				html.style.fontSize = htmlWidth/15 +"px";
+			})()
+		</script>
+		<style>
+			body,
+			body * {
+			  -webkit-text-size-adjust: 100%;
+			}
+			body,
+			h1 {
+			  margin: 0;
+			  font-family: Helvetica;
+			}
+			a,
+			input,
+			button {
+			  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			  -webkit-appearance: none;
+			}
+			a {
+			  text-decoration: none;
+			}
+			.rows{
+				display: -webkit-box;
+				display: flex;
+				padding: 0.4rem 0.5rem 0;
+			}
+			.rows div{
+				width: 0px;
+				-webkit-box-flex:1;
+				flex-grow: 1;
+			}
+			.rows div a {
+				font-size: 0.44rem;
+				color: #666;
+				text-align: center;
+				line-height: 1.04rem;
+				display: block;
+			}
+			.rows div a:before{
+				content: "";
+				display: block;
+				margin: 0 auto;
+				width: 1.74rem;
+				height: 1.73rem;
+				background-image: url(icon.png);
+				background-size: 9rem 3.6rem;
+			}
+			.rows:nth-of-type(1) div:nth-of-type(1) a:before{
+				background-position: 0 0;
+			}
+			.rows:nth-of-type(1) div:nth-of-type(2) a:before{
+				background-position: -1.8rem 0;
+			}
+			.rows:nth-of-type(1) div:nth-of-type(3) a:before{
+				background-position: -3.6rem 0;
+			}
+			.rows:nth-of-type(1) div:nth-of-type(4) a:before{
+				background-position: -5.4rem 0;
+			}
+			.rows:nth-of-type(1) div:nth-of-type(5) a:before{
+				background-position: -7.2rem 0;
+			}
+			.rows:nth-of-type(2) div:nth-of-type(1) a:before{
+				background-position: 0 -1.8rem;
+			}
+			.rows:nth-of-type(2) div:nth-of-type(2) a:before{
+				background-position: -1.8rem -1.8rem;
+			}
+			.rows:nth-of-type(2) div:nth-of-type(3) a:before{
+				background-position: -3.6rem -1.8rem;
+			}
+			.rows:nth-of-type(2) div:nth-of-type(4) a:before{
+				background-position: -5.4rem -1.8rem;
+			}
+			.rows:nth-of-type(2) div:nth-of-type(5) a:before{
+				background-position: -7.2rem -1.8rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="rows">
+			<div>
+				<a href="javascript:;">天猫</a>
+			</div>
+			<div>
+				<a href="javascript:;">聚划算</a>
+			</div>
+			<div>
+				<a href="javascript:;">天猫国际</a>
+			</div>
+			<div>
+				<a href="javascript:;">外卖</a>
+			</div>
+			<div>
+				<a href="javascript:;">天猫超市</a>
+			</div>
+		</div>
+		<div class="rows">
+			<div>
+				<a href="javascript:;">天猫</a>
+			</div>
+			<div>
+				<a href="javascript:;">聚划算</a>
+			</div>
+			<div>
+				<a href="javascript:;">天猫国际</a>
+			</div>
+			<div>
+				<a href="javascript:;">外卖</a>
+			</div>
+			<div>
+				<a href="javascript:;">天猫超市</a>
+			</div>
+		</div>
+	</body>
+</html>

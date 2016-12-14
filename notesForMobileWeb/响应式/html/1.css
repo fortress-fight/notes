@@ -1,0 +1,8 @@
+@charset 'UTF-8';
+
+#wrap div {
+	background: #fb3;
+}
+#wrap div:before {
+	content: '我来了';
+}

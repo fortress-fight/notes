@@ -84,7 +84,8 @@ section {
   height: 4.16667rem;
   position: relative;
 }
-section nav {
+
+#tabNav {
   position: absolute;
   left: 50%;
   bottom: 0.41667rem;
@@ -92,13 +93,16 @@ section nav {
   text-align: center;
   transform: translateX(-50%);
 }
-section nav a {
+#tabNav a {
   display: inline-block;
-  width: 0.83333rem;
-  height: 0.83333rem;
+  margin: 0 0.20833rem;
+  width: 0.41667rem;
+  height: 0.41667rem;
   border-radius: 60%;
-  border: 1px solid black;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.2);
+}
+#tabNav .active {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 #wrap {

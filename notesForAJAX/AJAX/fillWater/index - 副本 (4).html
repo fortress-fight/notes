@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+		}
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		ul {
+			width: 1200px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		li {
+			border: 1px solid black;
+			width: 20%;
+			margin: 10px;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script src = 'ajax.js'></script>
+	<script>
+		var oList = document.getElementById('list');
+		var aLi = oList.getElementsByTagName('li');
+		var page = 1;
+		var flag = true;
+
+
+		getList ();
+		add ()
+
+		function getList () {
+			flag = false;
+			console.log(page)
+			ajax('get', 'getPics.php', 'page='+page, function (data) {
+				var data = JSON.parse(data);
+
+				for (var i = 0; i < data.length; i++) {
+					var div = document.createElement('div');
+					var title = document.createElement('p');
+					var img = document.createElement('img');
+					var _index = getShort();
+
+					title.innerHTML = data[i].title;
+					img.src = data[i].preview;
+
+					div.appendChild(img);
+					div.appendChild(title);
+
+					aLi[_index].appendChild(div);
+				}
+				flag = true;
+			})
+		}
+
+
+		function getShort () {
+			var index = 0;
+			var short = aLi[0].offsetHeight;
+			for (var i = 0; i < aLi.length; i++) {
+				if (short > aLi[i].offsetHeight) {
+					short = aLi[i].offsetHeight;
+					index = i;
+				}
+			}
+			return index;
+		}
+
+
+		function add () {
+			window.onscroll = function () {
+				var _index = getShort();
+				var top = -getTop(aLi[_index]);
+				var target = aLi[_index].offsetHeight + top;
+				var now = window.pageYOffset + window.innerHeight;
+				if (window.pageYOffset + window.innerHeight > target) {
+					if (flag) {
+						page ++;
+						getList ();
+					}
+				}
+			}
+		}
+
+		function getTop (obj) {
+			var top = 0;
+			while (obj.offsetParent) {
+				top += obj.offsetTop;
+				obj = obj.offsetParent;
+			}
+			return top;
+		}
+
+	</script>
+</body>
+</html>

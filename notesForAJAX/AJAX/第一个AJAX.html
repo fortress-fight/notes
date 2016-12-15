@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="点击">
+	<script>
+		var oBtn = document.querySelector('input');
+		oBtn.onclick = function () {
+			var xhr = new XMLHttpRequest();
+			console.log(xhr)
+			xhr.open('get', 'data/1.txt', true);
+			xhr.send();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
+					alert(xhr.responseText)
+				}
+			}
+		}
+	</script>
+</body>
+</html>

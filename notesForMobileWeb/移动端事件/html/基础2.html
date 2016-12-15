@@ -20,14 +20,115 @@
 			<div>2</div>
 			<div>3</div>
 			<div>4</div>
-			<div>3</div>
-			<div>4</div>
 		</div>
 		<nav id="tabNav">
 		</nav>
 	</section>
 	<script>
-		(function tab (global, factory) {
+
+		function MobileTab (id) {
+			this.obj = document.getElementById(id)
+			this.num = 0;
+			this.target = 0;
+			this.inite();
+		};
+
+		MobileTab.prototype = {
+			constructor: MobileTab,
+			inite: function () {
+				var _this = this;
+				this.oneW = this.obj.parentNode.offsetWidth;
+				this.obj.innerHTML += this.obj.innerHTML;
+				this.son = this.obj.children;
+			},
+			setNav: function (id) {
+				this.nav = document.getElementById(id);
+				for (var i = 0; i < this.son.length/2; i++) {
+					this.nav.innerHTML += '<a href="javascript:;"></a>';
+					this.nav.children[0].className = 'active';
+				};
+				this.navs = this.nav.children;
+				
+			},
+			tabPlus: function () {
+				this.autoPlay();
+				this.touchMove();
+			},
+
+			autoPlay: function () {
+				var _this = this;
+				this.timer = setInterval(function () {
+					_this.num ++;
+					_this.next();
+				}, 2000);
+			},
+
+			next: function () {
+				var _this = this;
+				this.target = -this.num * this.oneW;
+				if (this.num >= (this.son.length/2)) {
+					startMove(this.obj, {left: this.target}, 300, function () {
+						_this.obj.style.left = '0px';
+						_this.num %= (_this.son.length/2);
+					})
+				} else {
+					startMove(this.obj,{left: this.target}, 300)
+				};
+				if (this.nav) {
+					this.num %= (this.navs.length)
+					for (var i = 0; i < this.navs.length; i++) {
+						this.navs[i].className = (this.num == i) ? 'active' : '';
+					}
+				}
+			},
+
+			touchMove: function () {
+				var _this = this;
+				this.obj.addEventListener('touchstart', down);
+				this.obj.addEventListener('touchmove', move);
+				this.obj.addEventListener('touchend', end);
+				function move (ev) {
+					ev = ev.targetTouches[0];
+					_this.move(ev);
+				};
+				function end () {
+					_this.end();
+				}
+				function down (ev) {
+					ev = ev.targetTouches[0];
+					_this.down(ev);
+				}
+			},
+			down: function (ev) {
+				var _this = this;
+				clearInterval(this.timer);
+				clearInterval(this.obj.timer);
+				this.initeX = ev.clientX;
+				if (this.num <= 0) {
+					this.num = this.son.length/2;
+					this.obj.style.left = -this.num * this.oneW + 'px';
+				}
+				this.nowPos = this.obj.offsetLeft;
+			},
+			move: function (ev) {
+				this.dis = ev.clientX - this.initeX;
+				this.obj.style.left = this.nowPos + this.dis + 'px';
+			},
+			end: function () {
+				var _this = this;
+				this.num = -Math.round(this.obj.offsetLeft/this.oneW);
+				this.next();
+				this.autoPlay();
+
+			}
+		}
+
+		var picTab = new MobileTab('wrap');
+
+		picTab.tabPlus();
+		picTab.setNav('tabNav');
+
+		/*(function tab (global, factory) {
 			factory(global);
 		})(typeof window !== "undefined" ? window : this, function (global,noGlobal) {
 			function tab (selector) {
@@ -140,7 +241,7 @@
 			});
 			var wrap = document.getElementById('wrap');
 			t(wrap).setLayOut('tabNav').tabPlus();
-		})();
+		})();*/
 	</script>
 </body>
 </html>

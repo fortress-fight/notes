@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="点击">
+	<ul></ul>
+	<script>
+		var oBtn = document.querySelector('input');
+		var list = document.querySelector('ul');
+		oBtn.onclick = function () {
+			var xhr = null;
+			try {
+				xhr = new XMLHttpRequest();
+			} catch(e) {
+				xhr = new ActiveXObject('Microsoft.XMLHttp')
+			}
+			xhr.open('get', 'getNew.php', true);
+			xhr.send();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						var data = JSON.parse(xhr.responseText);
+						var str = '';
+						for (var i = 0; i < data.length; i++) {
+							str += '<li><a href="">'+data[i].title+'</a> [<span>'+data[i].date+'</span>]</li>';
+							list.innerHTML = str;
+						}
+					}
+				} else {
+					document.body.innerHTML = xhr.status;
+				}
+			}
+		}
+	</script>
+</body>
+</html>

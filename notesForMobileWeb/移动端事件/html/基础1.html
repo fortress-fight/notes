@@ -20,10 +20,14 @@
 			<div>2</div>
 			<div>3</div>
 			<div>4</div>
-			<div>3</div>
-			<div>4</div>
 		</div>
-		<nav id="tabNav">
+		<nav>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
 		</nav>
 	</section>
 	<script>
@@ -38,7 +42,7 @@
 				inite: function (selector) {
 					this.obj = selector;
 				},
-				setLayOut: function (nav) {
+				setLayOut: function () {
 					this.oneW = this.obj.parentNode.offsetWidth;
 					this.obj.innerHTML += this.obj.innerHTML;
 					this.son = this.obj.children;
@@ -46,14 +50,6 @@
 					this.initX = 0;
 					this.num = 0;
 					this.target = 0;
-					if (typeof nav !== 'undefined') {
-						this.tabNav = document.getElementById(nav);
-						for (var i = 0; i < (this.son.length/2); i++) {
-							this.tabNav.innerHTML += '<a href="javascript:;"></a>';
-							this.tabNav.children[0].className = 'active';
-						}
-						this.navs = tabNav.children;
-					}
 					return this;
 				},
 				tabPlus: function () {
@@ -61,8 +57,10 @@
 					this.autoPlay();
 				},
 				autoPlay: function () {
+					console.log(this)
 					var _this = this;
 					this.timer = setInterval(function () {
+						console.log(1)
 						_this.num ++;
 						_this.next();
 					}, 2000)
@@ -71,19 +69,36 @@
 					var _this = this;
 					var next = - this.num * this.oneW;
 					if (this.num >= (this.son.length / 2)) {
-						startMove(this.obj, {left: next}, 300, function () {
+						startMove(this.obj, {left: next}, 600, function () {
 							_this.num %= (_this.son.length / 2);
 							_this.obj.style.left = - _this.num * _this.oneW + 'px';
 						});
 					} else {
-						startMove(this.obj, {left: next}, 300);
+						startMove(this.obj, {left: next}, 600);
 					}
-					this.setActive(this.num);
 				},
 				touchMove: function () {
 					var _this = this;
 					this.initX = 0;
 					this.obj.addEventListener('touchstart', down)
+					var getSingleEv = _this.single(_this.down);
+					function down (ev) {
+						ev = ev.touches[0];
+						clearInterval(_this.timer);
+						getSingleEv(ev, _this);
+					}
+				},
+				single: function (fn) {
+					var instance = null;
+					return function (ev, obj) {
+						return instance ? instance : (instance = fn.apply(obj, arguments))
+					}
+				},
+				down: function (ev) {
+					console.log('down')
+					var _this = this;
+					this.initX = ev.clientX;
+					this.now = this.obj.offsetLeft;
 					this.obj.addEventListener('touchmove', move);
 					this.obj.addEventListener('touchend', end);
 					function move (ev) {
@@ -94,41 +109,19 @@
 						ev = ev.touches[0];
 						_this.end(ev)
 					};
-					function down (ev) {
-						ev = ev.touches[0];
-						clearInterval(_this.timer);
-						clearInterval(_this.obj.timer);
-						_this.down(ev)
-
-					}
-				},
-				down: function (ev) {
-					var _this = this;
-					this.initX = ev.pageX;
-					if (this.num == 0) {
-						this.obj.style.left = -(this.son.length / 2 * this.oneW) + 'px';
-						this.num = (this.son.length / 2);
-					}
-					this.now = this.obj.offsetLeft;
 					return this;
 				},
 				move: function (ev) {
-					this.disX = ev.pageX - this.initX;
+					this.disX = ev.clientX - this.initX;
 					this.target = this.now + this.disX;
 					this.obj.style.left = this.target + 'px';
 				},
 				end: function () {
 					this.nowIndex = Math.round(this.obj.offsetLeft / this.oneW);
 					this.num = -this.nowIndex;
+					console.log(this.num)
 					this.next();
 					this.autoPlay();
-				},
-				setActive: function (num) {
-					if (!this.navs) {return};
-					num = num >= this.navs.length ? 0 : num;
-					for (var i = 0; i < this.navs.length; i++) {
-						this.navs[i].className = (i == num) ? 'active' : '';
-					}
 				}
 			};
 			tab.prototype.inite.prototype = tab.prototype;
@@ -139,7 +132,7 @@
 				ev.preventDefault();
 			});
 			var wrap = document.getElementById('wrap');
-			t(wrap).setLayOut('tabNav').tabPlus();
+			t(wrap).setLayOut().tabPlus();
 		})();
 	</script>
 </body>

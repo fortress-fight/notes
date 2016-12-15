@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="点击">
+	<script>
+        var oBtn = document.querySelector('input');
+        oBtn.onclick = function () {
+            var xhr = new XMLHttpRequest();
+            // data/2 -- 不存在
+            xhr.open('get', 'data/2.txt', true);
+            xhr.send();
+            console.log(xhr);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText) // 如果加载完成，并且请求内容存在时
+                } else {
+                    document.body.innerHTML = xhr.status;  // 如果加载失败,将错误的Http代码显示出来；
+                }
+            }
+        }
+    </script>
+</body>
+</html>

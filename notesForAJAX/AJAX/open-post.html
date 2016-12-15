@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="点击">
+	<script>
+        var oBtn = document.querySelector('input');
+        oBtn.onclick = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '2.open.php', true);
+
+            xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');//申明发送的数据类型
+
+
+            xhr.send('username=刘伟&age=30');
+            console.log(xhr);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        alert(xhr.responseText) // 如果加载完成，并且请求内容存在时
+                    } else {
+                        document.body.innerHTML = xhr.status + xhr.readyState;  // 如果加载失败,将错误的Http代码显示出来；
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

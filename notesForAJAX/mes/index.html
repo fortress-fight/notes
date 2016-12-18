@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/tool.js"></script>
+</head>
+<body>
+<div class="znsArea">
+<!--留言-->
+     <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="tijiaoText"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="btn1" class="inputs" value="" />
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+<!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+        	<!--<div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>-->
+        </div>
+        <div class="page" id="page">
+        	<a href="javascript:;" class="active">1</a>
+        	<a href="javascript:;">2</a>
+        	<a href="javascript:;">3</a>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    (function () {
+        $(function () {
+            function createMessage (json) {
+                var setting = {
+                    infor: '初始',
+                    time: '2018-09-08 16:37:60',
+                    up: 0,
+                    down: 0,
+                    id: 0
+                };
+                for (attr in json) {
+                    setting[attr] = json[attr];
+                }
+                var str = '';
+                str += '\
+                <div class="reply">\
+                    <p class="replyContent">'+ setting.infor +'</p>\
+                    <p class="operation">\
+                        <span class="replyTime">'+ setting.time +'</span>\
+                        <span class="handle">\
+                            <a href="javascript:;" class="top">'+ setting.up +'</a>\
+                            <a href="javascript:;" class="down_icon">'+ setting.down +'</a>\
+                            <a href="javascript:;" class="cut"  data = "'+ setting.id +'">删除</a>\
+                        </span>\
+                    </p>\
+                </div>'
+                return str;
+            }
+
+            
+
+            // 返回：[{id: ID, content: "内容", time: 时间戳, acc: 顶次数, ref: 踩次数}, {...}, ...]
+
+            function addMes () {
+                $.ajax({
+                    type: "get",
+                    url: "php/weibo.php",
+                    data: {
+                       act: "get",
+                       page: "num"
+                    },
+                    success: function (data) {
+                        data = eval(data);
+                        var str = '';
+                        $.each(data, function (index, con) {
+                            str += createMessage({
+                                infor: con.content,
+                                time: ff.setTime(con.time),
+                                up: 0,
+                                down: 0,
+                                id: con.id
+                            })
+                        })
+                        $('.messList').html(str);
+                    }
+                })
+            }
+
+            function remove (id) {
+                $.ajax({
+                    type: "get",
+                    url: "php/weibo.php",
+                    data: {
+                       act: "del",
+                       id: id
+                    }
+                })
+            }
+
+            // weibo.php?act=get_page_count    获取页数
+
+            function getPage (num) {
+                $.ajax({
+                    type: "get",
+                    url: "php/weibo.php",
+                    data: {
+                       act: "get_page_count",
+                    },
+                    success: function (data) {
+                        return data;
+                    }
+                })
+            }
+
+            // weibo.php?act=add&content=xxx   添加一条
+
+            $(function () {
+                
+            })
+
+            $('#btn1').click(function () {
+                var val = $('#tijiaoText').val();
+                if ((/^\s\s+\s$/).test(val) || val == ''){
+                    alert('请输入内容')
+                    return false;
+                }
+                $.ajax({
+                    url: 'php/weibo.php',
+                    data: {
+                       act: 'add',
+                       content: val
+                    },
+                    success: function (data) {
+                        addMes();
+                    }
+                })
+            })
+
+            $('.commentOn').click(function (ev) {
+                var target = ev.target;
+                // console.log(target.className);
+                switch (target.className) {
+                    case 'cut':
+                        $(target).parents('.reply').remove();
+                        remove($(target).attr('data'))
+                        break;
+                    default:
+                        // statements_def
+                        break;
+                }
+            })
+
+        })
+    })()
+</script>
+</html>

@@ -90,11 +90,11 @@ method-- get || post 规定用于发送 form-data 的 HTTP 方法。
 其中enctype 和 method需要注意
 
 >enctype 属性可能的值：
-application/x-www-form-urlencoded
+application/x-www-form-urlencoded  处理 XML
 multipart/form-data
 text/plain
 
->method中使用get传输，传输内容会以name = value & name = value的形式显示在url后面，后端可以通过GET在url中获取，注意这里操作的都是字符串格式，get传输的内容有长度限制，大概在2000左右
+>method中使用get传输，传输内容会以name = value & name = value的形式显示在url后面，后端可以通过GET在url中获取，注意这里操作的都是字符串格式，get传输的内容有长度限制，大概在2KB左右
 而使用POST是通过请求头发送的（不会被缓存）可以通过网络监控获取，可以传输各种数据；通过POST传输的数据长度理论上无限制，实际默认在8M左右；
 
 ##4.AJAX简单工作过程介绍：
@@ -103,18 +103,22 @@ text/plain
     oBtn.onclick = function() {
         //打开浏览器
         var xhr = new XMLHttpRequest();
-        //在地址栏输入地址
-        hr.open('get','1.txt',true);
-        //提交
-        xhr.send();
-        //等待服务器返回内容
+        //等待服务器返回内容 在XMLHttpRequest2 中有个 onload 方法可以检测到加载是否完成
+        //xhr.onload = function () {
+        //   alert(xhr.responseText);
+        //}
         xhr.onreadystatechange = function() {
             if ( xhr.readyState == 4 ) {
                 alert( xhr.responseText );
             }
         }
+        //在地址栏输入地址
+        hr.open('get','1.txt',true);
+        //提交
+        xhr.send();
     }
 ```
+
 
 ###4.1 - 第一步创建一个AJAX对象：
 
@@ -128,8 +132,8 @@ new XMLHttpRequest() || new AtiveXObject('Micrisoft.XMLHTTP') || 兼容处理
 
 兼容处理：
 ```
-方式一：
 var xhr = null;
+方式一：
 if (window.XMLHttpRequest) {
     xhr = new XMLHttpRequest();
 } else {
@@ -189,6 +193,7 @@ AJAX使用异步优点：
 - 在等待服务器响应时执行其他脚本
 - 当响应就绪后对响应进行处理
 
+
 2）send()
 简介：
     将由open规定好的请求方式，发送到服务器；
@@ -216,7 +221,7 @@ responseXML 获得 XML 形式的响应数据。
 
 2）事件1：onreadystatechange();
 
-简介：用于监控ajax的工作状态(属性：readyState),当readyState发生改变的时候就会触发。
+简介：用于监控ajax的工作状态(属性：readyState),当readyState发生改变的时候就会触发。必须在open前启动监听
 
 3）属性2：readyState
 简介：
@@ -334,6 +339,8 @@ JSON 接受的格式十分严格，必须是在双引号中，如果后端并没
 
 解决方法：
 1. 使用eval('('+ neiyong +')');
+实例：
+`var json = eval('('+ajax.responseText+')');`
 2. 使用new Function('', 'return'+ neiyong)();
 
 
@@ -362,7 +369,7 @@ echo "你的名字：{$username}，年龄：{$age}";
         var oBtn = document.querySelector('input');
         oBtn.onclick = function () {
             var xhr = new XMLHttpRequest();
-            xhr.open('get', '1.open.php?username= '+encodeURI('刘伟')+'&age=30&' + new Date().getTime(), true);
+            xhr.open('get', '1.open.php?username= '+encodeURIComponent('刘伟')+'&age=30&' + new Date().getTime(), true);
             xhr.send();
             console.log(xhr);
             xhr.onreadystatechange = function () {
@@ -381,7 +388,7 @@ echo "你的名字：{$username}，年龄：{$age}";
 分析：在传输的URL中，1.open.php是文件名，?后面的就是向后端提供的内容（表单的提交就是这样的），后端通过GET接收；
 
 注：
-1. 为什么要使用encodeURI()
+1. 为什么要使用encodeURIComponent()
 答：为了解决中文乱码的问题；
 
 2. 为什么最后要加上时间戳
@@ -438,7 +445,7 @@ post的请求头 -- 方法：setRequestHeader()
 
 注：
 1. 在POST方式传输数据时，传输的内容在send中，而get是在url中；
-2. POST的方式不需要encodeURI(),因为在请求头中就已经说明了数据储存格式了；
+2. POST的方式不需要encodeURIComponent(),因为在请求头中就已经说明了数据储存格式了；
 3. POST没有缓存的问题，因为post是提交数据，而提交数据不会有缓存，而get是获取数据，而获取数据就会存在缓存。
 
 ##7. AJAX实例
@@ -511,3 +518,13 @@ function ajax(method, url, data, suc) {
 }
 
 ```
+
+
+## XML 和 HTML
+
+HTML是超文本指标语言的因为缩写，XML是扩展标记语言的缩写，首先他们都是标记语言，是一种特殊的文本标记
+
+区别：
+
+第一点，XHTML（或是html）只能用于web（也就是网页中），而xml则不同，它是信息交换的标准语言，他可以跨平台进行信息的交流，比如电脑与手机。
+第二，xml的标记灵活多变，你可以起名字比如`<student>学生</student>`，但是XHTML和html是不行的，他两是写给浏览器看的，自己定义的就不会别识别，所以`<xx></xx>`这样的符号是约定，比如`<a href= http://www.baidu.com>百度</a>`，就是一个连接百度的超链接标记。

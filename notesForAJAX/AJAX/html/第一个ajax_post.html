@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" value="">
+	<script>
+		var btn = document.getElementsByTagName('input')[0];
+		btn.onblur = function () {
+			var val = this.value;
+			var xhr = new XMLHttpRequest();
+			xhr.open('post', 'php/post.php');
+			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			xhr.send('user='+val);
+			xhr.onload = function () {
+				alert(xhr.responseText);
+			}
+		}
+	</script>
+</body>
+</html>

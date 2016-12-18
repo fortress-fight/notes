@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" value="">
+	<script>
+		var btn = document.getElementsByTagName('input')[0];
+		btn.onblur = function () {
+			var xhr = new XMLHttpRequest();
+			var val = this.value;
+			xhr.open('get', 'php/get.php?user='+ encodeURIComponent(val), true);
+			xhr.send();
+			xhr.onload = function () {
+				alert(xhr.responseText);
+			}
+		}
+	</script>
+</body>
+</html>

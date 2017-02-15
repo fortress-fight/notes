@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style media="screen">
+    #box {
+      display: flex;
+      border: 1px solid black;
+      min-height: 500px;
+    }
+    #box div {
+      width: 100px;
+      /*height: 100px;*/
+      background: #58a;
+      border: 10px solid #fb3;
+      margin: 5px;
+      font-size: 50px;
+      line-height: 100px;
+      text-align: center;
+      color: #fff;
+      min-width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="btns">
+    <input type="button" value="dir">
+    <input type="button" value="wrap">
+    <input type="button" value="justify">
+    <input type="button" value="align">
+    <input type="button" value="alignC">
+  </div>
+  <h1 id="title"></h1>
+  <div id="box">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+  </div>
+  <script type="text/javascript">
+    var boxAttr = {
+      dir: {
+        name: 'flex-direction',
+        op: ['row', 'row-reverse', 'column', 'column-reverse']
+      },
+      wrap: {
+        name: 'flex-wrap',
+        op: ['nowrap', 'wrap', 'wrap-reverse']
+      },
+      justify: {
+        name: 'justify-content',
+        op: ["flex-start","flex-end", "center", "space-between", "space-around"]
+      },
+      align: {
+        name: 'align-items',
+        op: ["flex-start", "flex-end", "center", "baseline", "stretch"]
+      },
+      alignC: {
+        name: 'align-content',
+        op: ["flex-start","flex-end","center","space-between","space-around","stretch"]
+      }
+    }
+    var change = document.getElementById('btns');
+    var box = document.getElementById('box');
+    var title = document.getElementById('title');
+    btns.onclick = function (ev) {
+      var ev = ev || window.event;
+      var el = ev.target;
+
+      if (typeof el.index === 'undefined') {
+        el.index = 0;
+      } else {
+        el.index++;
+        el.index %= boxAttr[el.value].op.length;
+      }
+      box.style[boxAttr[el.value].name] = boxAttr[el.value].op[el.index];
+      title.innerHTML = boxAttr[el.value].name + ":" +boxAttr[el.value].op[el.index];
+    }
+  </script>
+</body>
+</html>

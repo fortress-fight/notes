@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style media="screen">
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    #box1 {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    #box1 p, div {
+      flex: 1 1 auto;
+      border: 1px solid black
+    }
+    p:nth-of-type(2) {
+      background: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="box1">
+    <div></div>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+  </div>
+</body>
+</html>

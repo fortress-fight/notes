@@ -1,0 +1,16 @@
+{
+  "name": "learn",
+  "version": "1.0.0",
+  "description": "learn webpack and ES6 Module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^0.26.2",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.2.1"
+  }
+}

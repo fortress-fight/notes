@@ -1,0 +1,8 @@
+ul {
+    li {
+        display: block
+    }
+    &:after {
+        content: "this is a text"
+    }
+}

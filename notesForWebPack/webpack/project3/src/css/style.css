@@ -1,0 +1,13 @@
+@import "./style2.css";
+body,
+html {
+    background: #58a;
+}
+
+div {
+    display: flex;
+}
+
+span {
+    flex: 1 1 80px;
+}

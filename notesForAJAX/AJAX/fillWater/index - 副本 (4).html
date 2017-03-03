@@ -48,7 +48,6 @@
 			console.log(page)
 			ajax('get', 'getPics.php', 'page='+page, function (data) {
 				var data = JSON.parse(data);
-
 				for (var i = 0; i < data.length; i++) {
 					var div = document.createElement('div');
 					var title = document.createElement('p');
@@ -62,7 +61,9 @@
 					div.appendChild(title);
 
 					aLi[_index].appendChild(div);
+
 				}
+
 				flag = true;
 			})
 		}

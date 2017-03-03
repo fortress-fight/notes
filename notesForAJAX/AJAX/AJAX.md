@@ -182,7 +182,7 @@ XMLHttpRequest对象的方法：
 1. GET 还是 POST？
 与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。
 然而，在以下情况中，请使用 POST 请求：
-**无法使用缓存文件（更新服务器上的文件或数据库）**
+**get无法使用缓存文件（更新服务器上的文件或数据库）**
 向服务器发送大量数据（POST 没有数据量限制）
 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
 2. 是否异步？
@@ -313,7 +313,7 @@ JSON.parse() --- 字符串 转 JSON
 
 注：
 1. 在转换的过程中，格式十分严格，JSON中的key值必须使用双引号；
-2. AJAX只要功能是获取数据，而具体的操作是DOM操作的；
+2. AJAX功能是获取数据，而具体的操作是DOM操作的；
 
 ```
 //alert(JSON)
@@ -485,7 +485,7 @@ post的请求头 -- 方法：setRequestHeader()
 实例二：ajax的封装：
 
 ```
-    
+
 function ajax(method, url, data, suc) {
     var xhr = null;
     try {

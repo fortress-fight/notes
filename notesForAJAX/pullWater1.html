@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+
+</style>
+</head>
+<body>
+	<div class="continer" id="div1">
+		<div id="area">
+		</div >
+	</div>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var throttle = function  (fn, interval, context) {
+		var _this = fn,
+			timer,
+			firstTimer = true;
+		return function () {
+			var _me = this,
+				args = arguments;
+
+			if (firstTimer) {
+				_this.apply(context||_me, args)
+				return firstTimer = false;
+			};
+
+			if (timer) {
+				return false;
+			};
+
+			timer = setTimeout(function () {
+				clearTimeout(timer);
+				_this.apply(context||_me, args);
+				timer = null;
+			}, interval || 100)
+		}
+	};
+	function pullWater (obj, json){
+		this.obj = obj,
+		this.columns,
+		this.arrL = [],
+		this.arrT = [],
+		this.first = true;
+		this.infor,
+		this.oneW;
+		this.setting = {
+			maxWidth: $(document).width(),
+			oneWidth: 0,
+			hInter: 20,
+			wInter: 20
+		};
+		if (typeof json !== 'undefined') {
+			for (var attr in json) {
+				if (json.hasOwnProperty(attr)) {
+					this.setting[attr] = json[attr]
+				}
+			}
+		};
+		this.inite()
+	};
+	pullWater.prototype = {
+		constructor: pullWater,
+		inite: function (){
+			var data = this.setting;
+			this.oneW = data.oneWidth+data.wInter;
+			this.columns = Math.floor(data.maxWidth/this.oneW)
+			for (var i = 0; i < this.columns; i++) {
+				this.arrT.push(0);
+				this.arrL.push(i * this.oneW)
+			}
+			this.obj.css({
+				margin: '0 auto',
+				position: 'relative',
+				width : this.oneW * this.columns + 'px',
+				maxWidth: '100%'
+			})
+		},
+		setData: function (date) {
+			this.getMin(this.arrT);
+			var minIx = this.infor.index;
+			if (date.w != 0 && date.h != 0) {
+				var H = (this.setting.oneWidth/date.w )* date.h;
+				var str = `<div style = "position: absolute; transition : 0.5s; top:${this.arrT[minIx]}px; left:${this.arrL[minIx]}px">
+					<img src = ${date.img} style = "width:${this.setting.oneWidth}px">
+				</div>`
+				this.arrT[minIx] += (H+this.setting.hInter);
+			};
+			var i = $(str);
+			this.obj.append(i)
+		},
+		repos: function (){
+			var _this = this;
+			this.columns = Math.floor(this.setting.maxWidth/this.oneW);
+			this.arrT.length = this.arrL.length = 0;
+			this.obj.css({
+				width : this.oneW * this.columns + 'px'
+			})
+			for (var i = 0; i < this.columns; i++) {
+				this.arrT.push(0);
+				this.arrL.push(i * this.oneW);
+			}
+			this.obj.children().each(function(i,e) {
+				var minIx = _this.getMin(_this.arrT).index;
+				$(e).css({
+					top: _this.arrT[minIx],
+					left: _this.arrL[minIx]
+				});
+				_this.arrT[minIx] += (e.scrollHeight+_this.setting.hInter);
+			})
+		},
+		getMin: function (arr) {
+			var min = Math.min.apply(Math, arr);
+			return this.infor = {
+				index: arr.indexOf(min),
+				input: min
+			}
+		}
+	}
+
+	var a = new pullWater ($('#area'), {
+		oneWidth: 200,
+		maxWidth: window.innerWidth
+	})
+	var page = 1;
+	var w = 240;
+	var minLi = null;
+	var onOff = false;
+	function cDiv(){
+		$.ajax({
+			url:'http://www.wookmark.com/api/json/popular?callback=?',
+			data:{
+				page:page
+			},
+			dataType:'json',
+			success:function(data){
+				$.each(data,function(i,e){
+					a.setData({
+						w: e.width,
+						h: e.height,
+						img: e.preview
+					});
+				});
+				onOff = true;
+			}
+		});
+	};
+	window.onscroll = function (){
+		if ($(window).height() + document.body.scrollTop > a.infor.input && onOff) {
+			onOff = false;
+			page++;
+			cDiv();
+		}
+	}
+	cDiv();
+	var thrRepos = throttle(a.repos, 200, a)
+	thrRepos();
+	window.onresize = function () {
+		thrRepos()
+	}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*document.cookie = 'name=ff';
+		document.cookie = 'age=24';*/
+
+
+		var username=document.cookie.split(";")[0].split("=")[1];
+		//JS操作cookies方法!
+		//写cookies 
+
+		setCookie('name', 'ff');
+		setCookie('age', '23');
+		function setCookie(name, value, day) {
+			var Days = day || 30;
+			var exp = new Date();
+			exp.setTime(exp.getTime() + Days*24*60*60*1000);
+			document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+		}
+
+
+
+		function getCookie(name) {
+			// reg: 以name开头，或者是空格开头，name后存在‘=’，并且‘=’后以‘;’ 结束或者是以任意字符开头，后面紧跟着‘;’或者直接结束
+			var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+			// match 匹配失败，返回null
+			if(arr=document.cookie.match(reg)) {
+				return unescape(arr[2]);
+			} else {
+				return null;
+			}
+		}
+
+		function delCookie (name) {
+			var exp = new Date();
+			exp.setTime(exp.getTime()-1);
+			var val = getCookie(name);
+			if (val != null) {
+				document.cookie = name+'='+val+';expires='+exp.toGMTString();
+			}
+		}
+		var a = getCookie('name');
+		alert(a);
+
+		delCookie('name');
+		var a = getCookie('name');
+
+		alert(a);
+	</script>
+</body>
+</html>

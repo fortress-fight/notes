@@ -78,19 +78,7 @@ Rander.prototype = {
 	//返回：{count:页数}
 	getPageCount: function () {
 		var _this = this;
-		$.ajax({
-			url: 'php/weibo.php',
-			data: 'act=get_page_count',
-			success: function (json) {
-				console.log(json);
-				_this.pageCount = json.count;
-				if ( _this.pageCount<_this.hash ) {
-					_this.hash = window.location.hash = _this.pageCount;
-				}
-				_this.randerPage();
-			}
-		})
-		/*tools.ajax({
+		tools.ajax({
 			url: 'php/weibo.php',
 			data: 'act=get_page_count',
 			success: function (json) {
@@ -101,7 +89,7 @@ Rander.prototype = {
 				_this.randerPage();
 			},
 			fail: this.fail
-		})*/
+		})
 	},
 	//渲染底部页码
 	randerPage: function () {
@@ -150,7 +138,6 @@ Rander.prototype = {
 					page: this.hash
 				},
 				success: function (json) {
-					console.log(json);
 					var str = '';
 					for ( var i=0; i<json.length; i++ ) {
 						str+=_this.creatEle(json[i]);

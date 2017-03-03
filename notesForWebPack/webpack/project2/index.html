@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <script type="text/javascript">
+        <%= compilation.assets[htmlWebpackPlugin.files.chunks.bundle.entry.substr(htmlWebpackPlugin.files.publicPath.length)].source() %>
+    </script>
+</head>
+
+<body>
+    <p>
+    </p>
+    <!-- 这里是一段注释 -->
+    <% for (var item in htmlWebpackPlugin.files.chunks) { %>
+        <% if (item !== 'bundle') { %>
+            <%= item %>
+                <script src="<%= htmlWebpackPlugin.files.chunks[item].entry %>"></script>
+                <% } %>
+                    <% } %>
+
+</body>

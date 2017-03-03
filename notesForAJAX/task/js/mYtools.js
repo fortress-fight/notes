@@ -207,7 +207,6 @@ var tools = (function(){
 				if ( xhr.readyState === 4) {
 					
 					if ( xhr.status >= 200 && xhr.status <= 206 ) {
-						console.log(xhr.responseText)
 						if ( settings.type === 'json' ) {
 							settings.success(eval('('+xhr.responseText+')'));
 						} else if ( settings.type === 'xml' ) {

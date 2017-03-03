@@ -20,6 +20,8 @@
 			<div>2</div>
 			<div>3</div>
 			<div>4</div>
+			<div>5</div>
+			<div>6</div>
 		</div>
 		<nav id="tabNav">
 		</nav>
@@ -41,6 +43,7 @@
 				this.obj.innerHTML += this.obj.innerHTML;
 				this.son = this.obj.children;
 			},
+			
 			setNav: function (id) {
 				this.nav = document.getElementById(id);
 				for (var i = 0; i < this.son.length/2; i++) {
@@ -48,8 +51,8 @@
 					this.nav.children[0].className = 'active';
 				};
 				this.navs = this.nav.children;
-				
 			},
+
 			tabPlus: function () {
 				this.autoPlay();
 				this.touchMove();
@@ -125,7 +128,7 @@
 
 		var picTab = new MobileTab('wrap');
 
-		picTab.tabPlus();
+		picTab.autoPlay();
 		picTab.setNav('tabNav');
 
 		/*(function tab (global, factory) {

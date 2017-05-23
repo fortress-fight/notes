@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas class = "myCanvas" width="500" height="500">Your Browser does not support Canvas, please upgrade</canvas>
+	<script>
+		var c = document.querySelectorAll('.myCanvas');
+		var btn = document.querySelector('input');
+		var ctx = c[0].getContext('2d');
+		var num = 0;
+		var speed = 10;
+		draw();
+
+		setInterval(draw, 100)
+
+		function draw () {
+			if (num >= 100 || num < 0) {
+				speed = -speed;
+			}
+			num += speed;
+
+			ctx.clearRect(0, 0, c.width, c.height);
+
+			var cLG = ctx.createRadialGradient(250, 250, 100, 250, 250, 250);
+			cLG.addColorStop(0,'#000');
+			cLG.addColorStop(num/100,"#58a");
+			cLG.addColorStop(1,"#fb3");
+			ctx.fillStyle = cLG;
+			ctx.fillRect(0, 0, 500, 500);
+		}
+	</script>
+</body>
+</html>

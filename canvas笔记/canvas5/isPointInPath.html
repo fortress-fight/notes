@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		p,
+		input {
+			position: absolute;
+			width: 100%;
+			text-align: center;
+			font-size: 50px;
+			color: #fff;
+		}
+		input {
+			top: auto;
+			bottom: 0;
+			color: #000;
+		}
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<img src="" alt="">
+	<script>
+		var c = document.querySelector('canvas');
+		var ctx = c.getContext('2d');
+
+		draw();
+
+		function draw () {
+			ctx.clearRect(0, 0, c.width, c.width);
+			ctx.save();
+// 点击在第一次beginPath()到closePath()中的路径内，isPointInPath判断失败
+			ctx.beginPath();
+
+			ctx.fillStyle = "red";
+			ctx.rect(0, 0, 200, 200);
+
+			ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+
+// 点击在第二次beginPath()到closePath()中的路径内，isPointInPath判断成功
+
+			ctx.save();
+			ctx.beginPath();
+
+			ctx.fillStyle = "red";
+			ctx.rect(200, 200, 200, 200);
+			ctx.fillStyle = "#58a";
+			ctx.rect(450, 200, 50, 50);
+
+			ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+		}
+
+		c.onmousedown = function (ev) {
+			var ev = ev || window.event;
+			var x = ev.clientX - c.getBoundingClientRect().left;
+			var y = ev.clientY - c.getBoundingClientRect().top;
+				console.log(x)
+				console.log(y)
+			if (ctx.isPointInPath(x, y)) {
+				alert(1);
+			}
+		}
+	</script>
+</body>
+</html>

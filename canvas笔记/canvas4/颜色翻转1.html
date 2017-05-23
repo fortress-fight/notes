@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+		  background: #58a;
+		}
+		canvas {
+		  position: absolute;
+		  top: 50%; left: 50%;
+		  margin-top: -250px;
+		  margin-left: -250px;
+		  background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script>
+		var c = document.getElementById('canvas');
+		var ctx = c.getContext('2d');
+		var img = new Image();
+		img.src = '3.jpg';
+		img.onload = function () {
+			draw()
+		}
+
+		function draw () {
+			ctx.beginPath();
+			ctx.save();
+
+			ctx.drawImage(img, 0, 0, 255, 255)
+			var newImg = ctx.getImageData(0, 0, 255, 255);
+
+			// 反色的就是用255-原来的色值，循环所有元素，然后扩展，最后赋值
+			for (var i = 0; i < newImg.width*newImg.height; i++) {
+				newImg.data[i*4] = 255 - newImg.data[i*4];
+				newImg.data[i*4+1] = 255 - newImg.data[i*4+1];
+				newImg.data[i*4+2] = 255 - newImg.data[i*4+2];
+				newImg.data[i*4+3] = 255;
+			}
+			ctx.putImageData(newImg, 255, 0);
+
+			ctx.restore();
+			ctx.closePath();
+		}
+	</script>
+</body>
+</html>

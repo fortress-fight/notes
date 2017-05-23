@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="点击">
+	<canvas class = "myCanvas" width="50" height="50">Your Browser does not support Canvas, please upgrade</canvas>
+	<canvas class = "myCanvas" width="500" height="500">Your Browser does not support Canvas, please upgrade</canvas>
+	<script>
+		var c = document.querySelectorAll('.myCanvas');
+		var btn = document.querySelector('input');
+		var ctx = c[0].getContext('2d');
+		var ctx1 = c[1].getContext('2d');
+		var img = new Image();
+		img.src = '3.jpg';
+		img.onload = function () {
+			draw();
+		}
+		function draw () {
+			ctx.drawImage(img,250,250,100,100, 0, 0, 50, 50);
+		}
+		btn.onclick = function () {
+			/* 创建填充样式 */
+			var bg = ctx1.createPattern(c[0],'repeat');
+			/* 使用创建的样式 */
+			ctx1.fillStyle = bg;
+			/* 绘制路径 */
+			ctx1.fillRect(0,0,c[1].width,c[1].height)
+		}
+	</script>
+</body>
+</html>

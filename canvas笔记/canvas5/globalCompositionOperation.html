@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		p,
+		input {
+			position: absolute;
+			width: 100%;
+			text-align: center;
+			font-size: 50px;
+			color: #fff;
+		}
+		input {
+			top: auto;
+			bottom: 0;
+			color: #000;
+		}
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<p></p>
+	<input type="button" value="切换">
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script>
+	// 黑色为目标图像，而pink为原图像
+		var c = document.querySelector('canvas');
+		var p = document.querySelector('p');
+		var ctx = c.getContext('2d');
+		var arr = [
+			'source-over',
+			'source-atop',
+			'source-in',
+			'source-out',
+			'destination-over',
+			'destination-atop',
+			'destination-in',
+			'destination-out',
+			'lighter',
+			'copy',
+			'xor'
+		]
+
+		draw();
+		var num = 0;
+
+		document.onclick  = function () {
+			p.innerHTML = arr[num];
+			draw()
+			num ++;
+			num = num % arr.length;
+		}
+
+		function draw () {
+			ctx.clearRect(0, 0, c.width, c.width);
+			ctx.save();
+			ctx.beginPath();
+
+
+			ctx.fillRect(0, 0, 200, 200);
+			ctx.fillRect(200, 200, 200, 200);
+
+			ctx.globalCompositeOperation = arr[num];
+
+			ctx.fillStyle = "pink";
+			ctx.fillRect(100, 100, 200, 300);
+
+
+			ctx.closePath();
+			ctx.restore();
+		}
+	</script>
+</body>
+</html>

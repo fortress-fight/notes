@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas class = "myCanvas" width="500" height="500">Your Browser does not support Canvas, please upgrade</canvas>
+	<script>
+		var c = document.querySelectorAll('.myCanvas');
+		var btn = document.querySelector('input');
+		var ctx = c[0].getContext('2d');
+		var num = 0;
+		var speed = 10;
+		var str = '好好学习天天向上'
+
+		draw();
+
+		// setInterval(draw, 100)
+
+		function draw () {
+			if (num >= 100 || num < 0) {
+				speed = -speed;
+			}
+			num += speed;
+
+			ctx.font = "30px impact";
+
+			ctx.strokeText(str, 100, 100, 300);
+
+			ctx.fillText(str, 200, 200, 300);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      background: #58a;
+    }
+    canvas {
+      position: absolute;
+      top: 50%; left: 50%;
+      margin-top: -250px;
+      margin-left: -500px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="1000" height="500"></canvas>
+  <script>
+    var c=document.getElementById("canvas");
+    var ctx=c.getContext("2d");
+    var num = 50;
+    // ctx.beginPath();
+    drag ();
+    setInterval(drag, 500);
+
+    // ctx.closePath();
+
+    function drag () {
+
+    ctx.beginPath();
+      ctx.strokeStyle = "#000";
+      ctx.moveTo(300, 10);
+      ctx.arcTo(400, 10, 500, 250, num);
+      num += 100;
+      ctx.stroke();
+      ctx.save();
+    }
+  </script>
+</body>
+</html>

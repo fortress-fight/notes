@@ -12,30 +12,31 @@
 - 可以通过 npm init 快速配置 package.json（只有项目名称（name）和项目版本（version）是必填的，其他都是选填的。）
 
 一个完整的package文件大概如下：
-```
-{
-	"name": "Hello World",
-	"version": "0.0.1",
-	"author": "张三",
-	"description": "第一个node.js程序",
-	"keywords":["node.js","javascript"],
-	"repository": {
-		"type": "git",
-		"url": "https://path/to/url"
-	},
-	"license":"MIT",
-	"engines": {"node": "0.10.x"},
-	"bugs":{"url":"http://path/to/bug","email":"bug@example.com"},
-	"contributors":[{"name":"李四","email":"lisi@example.com"}],
-	"scripts": {
-		"start": "node index.js"
-	},
-	"dependencies": {
-	},
-	"devDependencies": {
-	}
-}
-```
+
+    ```js
+      {
+        "name": "Hello World",
+        "version": "0.0.1",
+        "author": "张三",
+        "description": "第一个node.js程序",
+        "keywords":["node.js","javascript"],
+        "repository": {
+          "type": "git",
+          "url": "https://path/to/url"
+        },
+        "license":"MIT",
+        "engines": {"node": "0.10.x"},
+        "bugs":{"url":"http://path/to/bug","email":"bug@example.com"},
+        "contributors":[{"name":"李四","email":"lisi@example.com"}],
+        "scripts": {
+          "start": "node index.js"
+        },
+        "dependencies": {
+        },
+        "devDependencies": {
+        }
+      }
+    ```
 
 通过 npm init 快速搭建的 package.json 文件如下：
 ```

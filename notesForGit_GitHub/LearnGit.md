@@ -231,6 +231,12 @@ Git is free software.
 
 GitHub 有一个十分详细的针对数十种项目及语言的 .gitignore 文件列表，你可以在 [GitHub-ignore](https://github.com/github/gitignore) 找到它.
 
+5. 查看以暂存和为暂存的信息
+    通过 `git status` 仅仅是查看那些文件进行了修改，如果需要查看那些地方发生了修改，就需要使用另一个命令 `git diff`;
+    `git diff` -- 显示哪些地方发生了修改，但是还没有进行缓存(是通过对比本地文件和暂存区快照实现的)；
+    如果希望查看哪些部分已经暂存但是还没有提交，可以通过 `git diff --cached` 或者 `git diff --staged`
+
+
 目前我们仓库中已经存在一个 git.txt 文件，现在我们对这个文件进行修改；
 
 ```txt

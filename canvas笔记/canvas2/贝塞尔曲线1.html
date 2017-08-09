@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="500" height="500"></canvas>
+	<script>
+		var c = document.querySelector('canvas');
+		var ctx = c.getContext('2d');
+		var num = 0;
+
+		setInterval(function () {
+			ctx.clearRect(0, 0, c.width, c.height);
+			num++;
+			draw(num,0,500,250);
+		}, 50)
+
+		function draw (x1,y1,x2,y2) {
+			ctx.save();
+			ctx.beginPath();
+
+			ctx.lineWidth = 5;
+			ctx.strokeStyle = 'blue';
+			ctx.moveTo(x1, y1);
+			ctx.arc(x1, y1, 5, 0, 2*Math.PI);
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#fb3';
+			ctx.moveTo(x2, y2);
+			ctx.arc(x2, y2, 5, 0, 2*Math.PI);
+
+			ctx.moveTo(0, 250);
+			ctx.quadraticCurveTo (x1, y1, x2, y2)
+
+			ctx.stroke();
+			ctx.closePath();
+			ctx.restore();
+		}
+	</script>
+</body>
+</html>

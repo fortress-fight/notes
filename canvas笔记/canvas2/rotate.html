@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="500" height="500"></canvas>
+	<script>
+		var c = document.querySelector('canvas');
+		var ctx = c.getContext('2d');
+		var num = 0;
+		var num1 = 0;
+
+		setInterval(draw, 100)
+
+		function draw () {
+
+			ctx.clearRect(0, 0, c.width, c.height);
+
+			ctx.save();
+			ctx.beginPath();
+
+			num ++;
+			num1+=10;
+
+			ctx.fillStyle = 'red';
+			/* 将画布的0,0点移动到旋转中心位置，为了设置旋转角度 */
+			ctx.translate(50, 50);
+			ctx.rotate(num1*Math.PI/180);
+
+			/* 将画布的0，0点移动原来的位置，为了下面的旋转图形的绘制 */
+			ctx.translate(-50, -50);
+
+			ctx.fillRect(0, 0, 100, 100);
+
+			ctx.closePath();
+			ctx.restore();
+		}
+
+	</script>
+</body>
+</html>

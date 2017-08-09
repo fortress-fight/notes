@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			background: #58a;
+		}
+		canvas {
+			background: #fff;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="map" width="500" height="500"></canvas>
+	<script>
+		var c = document.getElementById('map');
+		var ctx = c.getContext('2d');
+		var t = 0;
+		ctx.beginPath();
+		draw ();
+		setInterval(draw, 30);
+		ctx.closePath();
+		function draw () {
+			ctx.clearRect(0, 0, c.width, c.height);
+			ctx.fillRect(t, t, 100, 100);
+			t += 1;
+		}
+	</script>
+</body>
+</html>

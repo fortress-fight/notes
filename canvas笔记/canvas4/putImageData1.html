@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- saved from url=(0101)file:///C:/Users/dream/Desktop/%E7%AC%94%E8%AE%B0/canvas%E7%AC%94%E8%AE%B0/canvas4/putImageData1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script>
+		(function () {
+			var num = 0;
+			var speed = 1;
+			var c = document.getElementById('canvas');
+			var ctx = c.getContext('2d');
+			ctx.beginPath();
+			ctx.save();
+
+			setInterval(draw, 20);
+
+			ctx.restore();
+			ctx.closePath();
+			function draw () {
+				ctx.clearRect(0, 0, c.width, c.height);
+				ctx.fillRect(0, 0, 200, 200);
+
+				var oImage = ctx.getImageData(0, 0, 200, 200);
+
+				for (var i = oImage.data.length - 1; i >= 0; i--) {
+					oImage.data[i*4] = 255;
+				}
+
+				if (num<0 || num>200) {
+					speed = -speed;
+				}
+
+				num += speed;
+
+				ctx.putImageData(oImage, 200, 200, num, num, 200, 200);
+
+			}
+		})()
+	</script>
+
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background: #58a;
+        }
+        
+        canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -250px;
+            margin-left: -250px;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+    <script>
+        var c = document.querySelector('canvas');
+        var ctx = c.getContext('2d');
+        var num = 0;
+        var num1 = 0;
+        var speed = 1;
+
+        setInterval(draw, 10)
+
+        function draw() {
+
+            ctx.clearRect(0, 0, c.width, c.height);
+
+            ctx.save();
+            ctx.beginPath();
+
+            num++;
+
+            if (num1 < 0 || num1 > 100) {
+                speed = -speed
+            };
+
+            num1 += speed;
+
+
+            ctx.fillStyle = 'red';
+            ctx.translate(250, 250);
+
+            ctx.scale(num1 / 100, num1 / 100);
+
+            ctx.rotate(num * Math.PI / 180);
+
+
+            // ctx.translate(-250, -250);
+
+
+            ctx.fillRect(-100, -100, 200, 200);
+
+            ctx.closePath();
+            ctx.restore();
+        }
+    </script>
+</body>
+
+</html>

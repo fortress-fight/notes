@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="500" height="500"></canvas>
+	<script src = 'getPos-setPos.js'></script>
+	<script>
+		var c = document.querySelector('canvas');
+		var ctx = c.getContext('2d');
+
+		draw();
+
+		function draw () {
+			ctx.beginPath();
+			ctx.save();
+
+
+			ctx.fillRect(0, 0, 150, 150);
+
+			var newImg = ctx.getImageData(0, 0, 150, 150);
+			for (var i = 0; i < newImg.width; i++) {
+				setPos(newImg, i, 5, [255,0,0,255])
+			}
+
+			ctx.putImageData(newImg, 150, 150);
+
+			ctx.restore();
+			ctx.closePath();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+
+		ul {
+			position: absolute;
+			top: 250px;
+			left: 50%;
+			margin: 0;
+			margin-left: -400px;
+			padding: 0;
+		}
+		ul li {
+			font: 50px/60px "微软雅黑";
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<ul>
+		<li>好</li>
+		<li>好</li>
+		<li>学</li>
+		<li>习</li>
+	</ul>
+	<script>
+		(function () {
+			var text = document.getElementsByTagName('li');
+			var c = document.getElementById('canvas');
+			var ctx = c.getContext('2d');
+			var iNow = 0;
+			var timer = null;
+
+			for (var i = text.length - 1; i >= 0; i--) {
+				text[i].onclick = function () {
+					draw(this.innerHTML);
+				}
+			}
+
+			/* 绘图开始 */
+
+			function draw (con) {
+				clearInterval(timer);
+				ctx.clearRect(0, 0, c.width, c.height);
+				ctx.beginPath();
+				ctx.save();
+
+				/* 设置字高，以及字体属性(字体中，字体大小和字体样式是必须的)，*/
+
+				var h = 250;
+				ctx.font = 250 + 'px Arial';
+				ctx.fillStyle = "red";
+
+				/* 设置字体上下左右居中 */
+				ctx.textAlign = "center";
+				ctx.textBaseline = "middle";
+
+				/* 获取文字宽度 */
+
+				var m = ctx.measureText(con).width;
+				ctx.fillText(con, 255, 255);
+				var oImg = ctx.getImageData((c.width-m)/2, (c.height-m)/2, m, m);
+
+				/* 关键：这里的使用arrRandom目的：通过m*h的到所有像素的个数，从所有的像素中，随机获取其中五分之一的像素位置 */
+
+				var newArr = arrRandom(m*h, m*h/5);
+				console.log(newArr)
+
+				/*将画布中的文字清除，为创建的图片做准备*/
+
+				ctx.clearRect(0, 0, c.width, c.height);
+
+				/* 新的空白 ImageData 对象,用于存放像素信息 */
+
+				var newPic = ctx.createImageData(m, h);
+
+				/*
+					关键：将随机获取的像素位置扩展成具有完整信息的数据
+				*/
+
+				/*
+					关键：每次循环一次定时器，就将newArr其中的一项显示出来，最终就实现了完整的显示；
+				 */
+
+				timer = setInterval(function () {
+
+					for (var i = newArr[iNow].length-1; i >= 0; i--) {
+						newPic.data[newArr[iNow][i] * 4] = oImg.data[newArr[iNow][i] * 4];
+						newPic.data[newArr[iNow][i] * 4+1] = oImg.data[newArr[iNow][i] * 4+1];
+						newPic.data[newArr[iNow][i] * 4+2] = oImg.data[newArr[iNow][i] * 4+2];
+						newPic.data[newArr[iNow][i] * 4+3] = oImg.data[newArr[iNow][i] * 4+3];
+					}
+					/* 将创建的imageData对象，放入画布 */
+
+					ctx.putImageData(newPic, (c.width-m)/2, (c.height-m)/2);
+
+					if(iNow == 4){
+						iNow = 0;
+						clearInterval(timer);
+					} else{
+						iNow++;
+					}
+
+				}, 100)
+
+				ctx.restore();
+				ctx.closePath();
+			}
+
+			/* all -- 所有像素的个数 select要选取的像素个数 */
+			function arrRandom (all, select) {
+				var allArr = [];
+				var arr = [];
+				/* 相当于将像素顺序记录 */
+				for (var i = all-1; i >= 0; i--) {
+					allArr.push(i);
+				};
+				/*
+				关键，将all循环all/select遍，从而使allArr被截取all/select次，allArr被截取干净就意味着所有的像素信息都已经保存出来，然后每一次截取的当成数组中的一项，用于以后每次添加一项。
+				 */
+				for (var j = all/select; j >= 0; j--) {
+					var newArr = [];
+					for (var i = select; i >= 0; i--) {
+						/* 这里的splice也很关键，可以保证已经选过的不会被重复选中 */
+						newArr.push(allArr.splice(Math.floor(Math.random()*allArr.length), 1))
+					}
+					arr.push(newArr);
+				}
+				/* 随机保留选取的像素在总像素的位置 */
+				return arr;
+			}
+		})()
+	</script>
+</body>
+</html>

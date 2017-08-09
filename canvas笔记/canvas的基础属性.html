@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			background: #000;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="500" height="500">哈哈哈</canvas>
+	<script>
+		var oC = document.getElementsByTagName('canvas')[0];
+		var oCG = oC.getContext('2d');
+		oCG.fillStyle = "red";
+		oCG.lineWidth = 10;
+		oCG.beginPath();
+		oCG.fillRect(100,100,100,100);
+		oCG.strokeRect(100,100,100,100);
+		oCG.closePath();
+		oCG.beginPath();
+		oCG.strokeRect(250,100,100,100);
+		oCG.fillRect(250,100,100,100);
+		oCG.closePath();
+	</script>
+</body>
+</html>

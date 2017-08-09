@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+		  background: #58a;
+		}
+		canvas {
+		  position: absolute;
+		  top: 50%; left: 50%;
+		  margin-top: -250px;
+		  margin-left: -250px;
+		  background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script src = 'getPos-setPos.js'></script>
+	<script>
+		var c = document.getElementById('canvas');
+		var ctx = c.getContext('2d');
+		var img = new Image();
+		img.src = '3.jpg';
+		img.onload = function () {
+			draw()
+		}
+
+		function draw () {
+			ctx.beginPath();
+			ctx.save();
+
+			ctx.drawImage(img, 0, 0, 255, 255)
+			var newImg = ctx.getImageData(0, 0, 255, 255);
+			var newData = ctx.createImageData(newImg);
+
+			var num = 5;
+			var w = newImg.width/5;
+			var h = newImg.height/5;
+
+
+			/*这里比较绕，首先通过前两次的循环，循环了newImg中的5分之一的像素数，然后以一个像素扩充成5*5的像素，先从5*5的像素中随机出一个数据，然后循环一下这个5*5的像素，将这些像素的值统一设置为上次随机出来的数据，最后将得到的数据放到newData对象中再将newData放到画布上*/
+
+			for (var i = 0; i < h; i++) {
+				for (var j = 0; j < w; j++) {
+					var color = getPos(newImg,j*num+Math.floor(Math.random()*num),i*num+Math.floor(Math.random()*num));
+					for (var k = 0; k < num; k++) {
+						for (var t = 0; t < num; t++) {
+							setPos(newData, j*num+k, i*num+t, color)
+						}
+					}
+				}
+			}
+			ctx.putImageData(newData, 0, 255);
+
+			ctx.restore();
+			ctx.closePath();
+		}
+	</script>
+</body>
+</html>

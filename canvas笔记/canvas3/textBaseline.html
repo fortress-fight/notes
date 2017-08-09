@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas class = "myCanvas" width="500" height="500">Your Browser does not support Canvas, please upgrade</canvas>
+	<script>
+		var c = document.querySelectorAll('.myCanvas');
+		var btn = document.querySelector('input');
+		var ctx = c[0].getContext('2d');
+		var num = 0;
+		var speed = 10;
+		var str = '好好学习天天向上'
+		var arr = ['alphabetic', 'top', 'hanging', 'middle', 'ideographic', 'bottom',]
+
+		draw();
+
+		setInterval(draw, 1000)
+
+		function draw () {
+			ctx.clearRect(0, 0, c[0].width, c[0].height);
+
+			num++;
+			num = num%arr.length;
+
+			ctx.font = "50px impact";
+
+			ctx.textAlign = 'middle';
+
+			ctx.strokeText('这里是标准', 0, 250, 500);
+
+			ctx.font = "20px impact";
+
+			ctx.textAlign = arr[num];
+
+			ctx.strokeText(''+arr[num], 250, 250, 500);
+
+			ctx.beginPath();
+
+			ctx.moveTo(250, 0);
+
+			ctx.fillStyle = "red";
+
+			ctx.lineTo(250, 500);
+
+			ctx.stroke();
+
+			// ctx.fillText(str, 200, 200, 300);
+		}
+	</script>
+</body>
+</html>

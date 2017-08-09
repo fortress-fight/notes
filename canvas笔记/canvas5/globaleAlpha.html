@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background: #58a;
+		}
+		canvas {
+			position: absolute;
+			top: 50%; left: 50%;
+			margin-top: -250px;
+			margin-left: -250px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script>
+		var c = document.querySelector('canvas');
+		var ctx = c.getContext('2d');
+		draw();
+		function draw () {
+			ctx.save();
+			ctx.beginPath();
+
+			ctx.fillRect(0, 0, 200, 200);
+			ctx.globalAlpha = 0.5;
+
+			ctx.fillStyle = "pink";
+			ctx.fillRect(100, 100, 200, 200);
+
+
+			ctx.closePath();
+			ctx.restore();
+		}
+	</script>
+</body>
+</html>
